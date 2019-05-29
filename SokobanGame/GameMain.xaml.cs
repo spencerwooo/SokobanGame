@@ -24,5 +24,23 @@ namespace SokobanGame
     {
       InitializeComponent();
     }
+
+    private void GoBack(object sender, RoutedEventArgs e)
+    {
+      var result = MessageBox.Show("Do you really want to leave this level?", "Abort level", MessageBoxButton.YesNo, MessageBoxImage.Question);
+      if (result == MessageBoxResult.Yes)
+      {
+        NavigationService.Navigate(new Uri("LevelSelect.xaml", UriKind.Relative));
+      }
+      else
+      {
+        // Do nothing.
+      }
+    }
+
+    private void BackHome(object sender, RoutedEventArgs e)
+    {
+      NavigationService.Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
+    }
   }
 }

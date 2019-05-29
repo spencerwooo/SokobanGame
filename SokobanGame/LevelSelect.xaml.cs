@@ -27,7 +27,8 @@ namespace SokobanGame
 
     private void PlayLevel(object sender, RoutedEventArgs e)
     {
-      MessageBox.Show("Yeah! Play level", "Retro Sokuban");
+      // MessageBox.Show("Yeah! Play level", "Retro Sokuban");
+      NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
     }
 
     private void BackHome(object sender, RoutedEventArgs e)

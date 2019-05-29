@@ -170,5 +170,10 @@
   <ItemGroup>
     <Resource Include="Resources\startGameBtn.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\stats\health.png" />
+    <Resource Include="Resources\stats\moves.png" />
+    <Resource Include="Resources\stats\time.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

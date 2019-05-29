@@ -41,7 +41,15 @@ namespace SokobanGame
 
     private void CloseWindow(object sender, RoutedEventArgs e)
     {
-      Close();
+      var result = MessageBox.Show("Do you really want to quit?", "Quit Game", MessageBoxButton.YesNo, MessageBoxImage.Question);
+      if (result == MessageBoxResult.Yes)
+      {
+        Close();
+      }
+      else
+      {
+        // Do nothing.
+      }
     }
   }
 }
