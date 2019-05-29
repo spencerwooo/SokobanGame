@@ -16,32 +16,18 @@ using System.Windows.Shapes;
 namespace SokobanGame
 {
   /// <summary>
-  /// Interaction logic for MainWindow.xaml
+  /// Interaction logic for WelcomePage.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class WelcomePage : Page
   {
-    public MainWindow()
+    public WelcomePage()
     {
       InitializeComponent();
-      _NavigationFrame.Navigate(new WelcomePage());
     }
 
-    //private void StartGame(object sender, RoutedEventArgs e)
-    //{
-
-    //}
-
-    private void DragWindow(object sender, MouseButtonEventArgs e)
+    private void StartGame(object sender, RoutedEventArgs e)
     {
-      if (e.ChangedButton == MouseButton.Left)
-      {
-        DragMove();
-      }
-    }
-
-    private void CloseWindow(object sender, RoutedEventArgs e)
-    {
-      Close();
+      NavigationService.Navigate(new Uri("LevelSelect.xaml", UriKind.Relative));
     }
   }
 }

@@ -5,19 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SokobanGame"
         mc:Ignorable="d"
-        Title="Sokoban" Height="480" Width="800" WindowStyle="None" FontFamily="Peepo" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Icon="Resources/icon.png">
-    <Grid Background="#FF3D3433">
-        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,380,0,0" VerticalAlignment="Top" Width="114" FontFamily="Peepo" FontSize="16" Click="StartGame" BorderBrush="{x:Null}" Foreground="White" Height="36">
-            <Button.Background>
-                <ImageBrush ImageSource="Resources/startButton.png"/>
-            </Button.Background>
-        </Button>
-        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="30" Height="30" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="CloseWindow">
-            <Button.Background>
-                <ImageBrush ImageSource="Resources/exit.png"/>
-            </Button.Background>
-        </Button>
-        <Rectangle Fill="#FF2B2524" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="770" PreviewMouseDown="DragWindow"/>
-        <Image HorizontalAlignment="Center" Height="100" Margin="0,110,0,0" VerticalAlignment="Top" Width="550" Source="Resources/title.png" Stretch="Fill"/>
-    </Grid>
+        Title="Sokoban" Height="480" Width="800" FontFamily="Peepo" WindowStartupLocation="CenterScreen" Icon="Resources/icon.png" WindowStyle="None" AllowsTransparency="True">
+    <DockPanel Background="#FF3D3433">
+        <Grid>
+            <Rectangle Fill="#FF2B2524" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="770" PreviewMouseDown="DragWindow"/>
+            <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="CloseWindow" Margin="770,0,0,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/exit.png"/>
+                </Button.Background>
+            </Button>
+            <Image HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Height="22" Source="Resources/icon.png"/>
+            <Label Content="Retro Sokoban" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Background="Transparent" Foreground="White"/>
+            <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" Margin="0,30,0,0"></Frame>
+        </Grid>
+    </DockPanel>
 </Window>

@@ -16,32 +16,23 @@ using System.Windows.Shapes;
 namespace SokobanGame
 {
   /// <summary>
-  /// Interaction logic for MainWindow.xaml
+  /// Interaction logic for LevelSelect.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class LevelSelect : Page
   {
-    public MainWindow()
+    public LevelSelect()
     {
       InitializeComponent();
-      _NavigationFrame.Navigate(new WelcomePage());
     }
 
-    //private void StartGame(object sender, RoutedEventArgs e)
-    //{
-
-    //}
-
-    private void DragWindow(object sender, MouseButtonEventArgs e)
+    private void PlayLevel(object sender, RoutedEventArgs e)
     {
-      if (e.ChangedButton == MouseButton.Left)
-      {
-        DragMove();
-      }
+      MessageBox.Show("Yeah! Play level", "Retro Sokuban");
     }
 
-    private void CloseWindow(object sender, RoutedEventArgs e)
+    private void BackHome(object sender, RoutedEventArgs e)
     {
-      Close();
+      NavigationService.Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
     }
   }
 }

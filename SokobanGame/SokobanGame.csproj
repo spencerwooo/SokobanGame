@@ -76,6 +76,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="GameMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LevelSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,10 +95,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="GameMain.xaml.cs">
+      <DependentUpon>GameMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LevelSelect.xaml.cs">
+      <DependentUpon>LevelSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WelcomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -138,6 +159,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\left.png" />
+    <Resource Include="Resources\right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\startGameBtn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
