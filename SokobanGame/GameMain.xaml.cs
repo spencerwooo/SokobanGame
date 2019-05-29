@@ -24,6 +24,7 @@ namespace SokobanGame
     public GameMain()
     {
       InitializeComponent();
+      // Get data from LevelSelect
       startCountDown(CountDownTimer);
     }
 
@@ -59,7 +60,8 @@ namespace SokobanGame
       var result = MessageBox.Show("Do you really want to leave this level?", "Abort level", MessageBoxButton.YesNo, MessageBoxImage.Question);
       if (result == MessageBoxResult.Yes)
       {
-        NavigationService.Navigate(new Uri("LevelSelect.xaml", UriKind.Relative));
+        // NavigationService.Navigate(new Uri("LevelSelect.xaml", UriKind.Relative));
+        NavigationService.GoBack();
       }
       else
       {

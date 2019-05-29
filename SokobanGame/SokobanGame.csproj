@@ -175,5 +175,13 @@
     <Resource Include="Resources\stats\moves.png" />
     <Resource Include="Resources\stats\time.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\levels\level1.png" />
+    <Resource Include="Resources\levels\level2.png" />
+    <Resource Include="Resources\levels\level3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\map\grass.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
