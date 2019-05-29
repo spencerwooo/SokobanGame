@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,6 +24,34 @@ namespace SokobanGame
     public GameMain()
     {
       InitializeComponent();
+      startCountDown(CountDownTimer);
+    }
+
+    private void startCountDown(FrameworkElement target)
+    {
+      var countDownAnimation = new StringAnimationUsingKeyFrames();
+      var remainingTime = 60;
+
+      for (var i = remainingTime; i > 0; i--)
+      {
+        var keyTime = TimeSpan.FromSeconds(remainingTime - i);
+        var frame = new DiscreteStringKeyFrame("Time: " + i.ToString() + "s", KeyTime.FromTimeSpan(keyTime));
+        countDownAnimation.KeyFrames.Add(frame);
+      }
+
+      countDownAnimation.KeyFrames.Add(new DiscreteStringKeyFrame("Time's up!", KeyTime.FromTimeSpan(TimeSpan.FromSeconds(remainingTime + 1))));
+      Storyboard.SetTargetName(countDownAnimation, target.Name);
+      Storyboard.SetTargetProperty(countDownAnimation, new PropertyPath(TextBlock.TextProperty));
+
+      var countdownStoryboard = new Storyboard();
+      countdownStoryboard.Children.Add(countDownAnimation);
+      countdownStoryboard.Completed += CountdownTimerCompleted;
+      countdownStoryboard.Begin(this);
+    }
+
+    private void CountdownTimerCompleted(object sender, EventArgs e)
+    {
+      MessageBox.Show("Time's up!");
     }
 
     private void GoBack(object sender, RoutedEventArgs e)

@@ -15,8 +15,7 @@
             </Button.Background>
         </Button>
         <Image HorizontalAlignment="Left" Height="40" Margin="628,26,0,0" VerticalAlignment="Top" Width="40" Source="Resources/stats/time.png"/>
-        <Label Content="Time" HorizontalAlignment="Left" Margin="678,26,0,0" VerticalAlignment="Top" FontFamily="Peepo" FontSize="18" Foreground="White" FontWeight="Bold"/>
-        <Label Content="60:00" HorizontalAlignment="Left" Margin="728,26,0,0" VerticalAlignment="Top" FontFamily="Peepo" FontSize="18" Foreground="White" FontWeight="Bold"/>
+        <TextBlock x:Name="CountDownTimer" HorizontalAlignment="Left" Margin="678,31,0,0" VerticalAlignment="Top" FontFamily="Peepo" FontSize="18" Foreground="White" FontWeight="Bold"/>
         <Rectangle Fill="#FF97b052" HorizontalAlignment="Center" Height="350" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Center" Width="350"/>
         <Image HorizontalAlignment="Left" Height="40" Margin="630,313,0,0" VerticalAlignment="Top" Width="40" Source="Resources/stats/health.png"/>
         <Label Content="LEVEL #1" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontFamily="Peepo" FontSize="32" Foreground="White" FontWeight="Bold"/>
