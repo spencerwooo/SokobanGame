@@ -7,8 +7,7 @@
         mc:Ignorable="d"
         Title="Sokoban" Height="480" Width="800" WindowStyle="None" FontFamily="Peepo" AllowsTransparency="True" WindowStartupLocation="CenterScreen" Icon="Resources/icon.png">
     <Grid Background="#FF3D3433">
-        <Label Content="Sokoban" HorizontalAlignment="Center" Margin="0,100,0,0" VerticalAlignment="Top" Height="66" Width="154" FontSize="36" FontFamily="Peepo" FontWeight="Bold" Foreground="White"/>
-        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="114" FontFamily="Peepo" FontSize="16" Click="StartGame" BorderBrush="{x:Null}" Foreground="White" Height="36">
+        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,380,0,0" VerticalAlignment="Top" Width="114" FontFamily="Peepo" FontSize="16" Click="StartGame" BorderBrush="{x:Null}" Foreground="White" Height="36">
             <Button.Background>
                 <ImageBrush ImageSource="Resources/startButton.png"/>
             </Button.Background>
@@ -19,5 +18,6 @@
             </Button.Background>
         </Button>
         <Rectangle Fill="#FF2B2524" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="770" PreviewMouseDown="DragWindow"/>
+        <Image HorizontalAlignment="Center" Height="100" Margin="0,110,0,0" VerticalAlignment="Top" Width="550" Source="Resources/title.png" Stretch="Fill"/>
     </Grid>
 </Window>
