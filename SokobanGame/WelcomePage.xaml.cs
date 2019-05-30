@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace SokobanGame
 {
@@ -12,12 +14,13 @@ namespace SokobanGame
   /// </summary>
   public partial class WelcomePage : Page
   {
+
     public WelcomePage()
     {
       InitializeComponent();
-      jumpAnimation(PlayerIcon1, 15, 2.0, 5);
-      jumpAnimation(PlayerIcon2, 15, 1.5, 5);
-      jumpAnimation(PlayerIcon3, 15, 1.8, 5);
+      jumpAnimation(PlayerIcon1, 15, 2.0);
+      jumpAnimation(PlayerIcon2, 15, 1.5);
+      jumpAnimation(PlayerIcon3, 15, 1.8);
     }
 
     private void StartGame(object sender, RoutedEventArgs e)
@@ -26,7 +29,7 @@ namespace SokobanGame
       NavigationService.Navigate(new LevelSelect());
     }
 
-    private void jumpAnimation(Image target, double newY, double duration, double animationSpan)
+    private void jumpAnimation(Image target, double newY, double duration)
     {
       Vector offset = VisualTreeHelper.GetOffset(target);
       var top = offset.X;
@@ -45,5 +48,6 @@ namespace SokobanGame
 
       translateTransform.BeginAnimation(TranslateTransform.YProperty, animate);
     }
+
   }
 }

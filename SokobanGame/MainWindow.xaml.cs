@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Navigation;
+
 namespace SokobanGame
 {
   /// <summary>
@@ -10,6 +12,7 @@ namespace SokobanGame
   /// </summary>
   public partial class MainWindow : Window
   {
+
     // For playing lobby music in background
     MediaPlayer mediaPlayer = new MediaPlayer();
 
@@ -58,5 +61,6 @@ namespace SokobanGame
         // Do nothing.
       }
     }
+
   }
 }
