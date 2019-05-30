@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-
 namespace SokobanGame
 {
   /// <summary>
@@ -22,7 +22,11 @@ namespace SokobanGame
 
       // Start playing background music
       string lobbyMusicPath = "../../../Resources/music/LobbyMusic.mp3";
+
+      //MediaPlayerElement.Source = new Uri(lobbyMusicPath, UriKind.Relative);
+
       mediaPlayer.Open(new Uri(lobbyMusicPath, UriKind.Relative));
+      mediaPlayer.MediaEnded += new EventHandler(Media_Ended);
       mediaPlayer.Play();
     }
 

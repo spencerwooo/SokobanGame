@@ -18,11 +18,11 @@
                 <ImageBrush ImageSource="/SokobanGame;component/Resources/startButton.png"/>
             </Button.Background>
         </Button>
-        <Image x:Name="PlayerIcon1" HorizontalAlignment="Left" Height="42" Margin="70,0,0,30" VerticalAlignment="Bottom" Width="31" 
+        <Image x:Name="PlayerIcon1" HorizontalAlignment="Left" Height="42" Margin="70,0,0,45" VerticalAlignment="Bottom" Width="31" 
                Source="/SokobanGame;component/Resources/player/player1.png" Stretch="Fill"/>
-        <Image x:Name="PlayerIcon2" HorizontalAlignment="Left" Height="42" Margin="140,0,0,30" VerticalAlignment="Bottom" Width="31" 
+        <Image x:Name="PlayerIcon2" HorizontalAlignment="Left" Height="42" Margin="140,0,0,45" VerticalAlignment="Bottom" Width="31" 
                Source="/SokobanGame;component/Resources/player/player2.png" Stretch="Fill"/>
-        <Image x:Name="PlayerIcon3" HorizontalAlignment="Left" Height="42" Margin="210,0,0,30" VerticalAlignment="Bottom" Width="31" 
+        <Image x:Name="PlayerIcon3" HorizontalAlignment="Left" Height="42" Margin="210,0,0,45" VerticalAlignment="Bottom" Width="31" 
                Source="/SokobanGame;component/Resources/player/player3.png" Stretch="Fill"/>
         <Label Content="©2019 Team Offline Flower" HorizontalAlignment="Right" Margin="0,0,40,30" VerticalAlignment="Bottom" 
                Foreground="White" FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="14"/>

@@ -13,6 +13,7 @@ namespace SokobanGame
   {
     private int currentLevel = 1;
     private int totalLevels = 11;
+
     public LevelSelect()
     {
       InitializeComponent();

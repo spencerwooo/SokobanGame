@@ -10,16 +10,18 @@
 
     <DockPanel Background="#FF3D3433">
         <Grid>
-            <Rectangle Fill="#FF2B2524" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="770" PreviewMouseDown="DragWindow"/>
-            <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" 
-                    BorderBrush="{x:Null}" Foreground="{x:Null}" Click="CloseWindow" Margin="770,0,0,0">
+            <Rectangle Fill="#FF2B2524" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="770" 
+                       PreviewMouseDown="DragWindow"/>
+            <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                    Width="30" Height="30" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="CloseWindow" Margin="770,0,0,0">
                 <Button.Background>
                     <ImageBrush ImageSource="Resources/exit.png"/>
                 </Button.Background>
             </Button>
             <Image HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Height="22" Source="Resources/icon.png"/>
-            <Label Content="Retro Sokoban" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Background="Transparent" Foreground="White"/>
-            <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" Margin="0,30,0,0"></Frame>
+            <Label Content="Retro Sokoban" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" 
+                   Background="Transparent" Foreground="White"/>
+            <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" Margin="0,30,0,0" />
         </Grid>
     </DockPanel>
 </Window>
