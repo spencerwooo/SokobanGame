@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SokobanGame
 {
@@ -21,10 +11,18 @@ namespace SokobanGame
   /// </summary>
   public partial class GameMain : Page
   {
-    public GameMain()
+    private int gameLevel;
+    private int currentHealth = 3;
+    private int currentSteps = 0;
+    public GameMain(int gameLevel)
     {
       InitializeComponent();
+
       // Get data from LevelSelect
+      this.gameLevel = gameLevel;
+
+      initMap(gameLevel);
+
       startCountDown(CountDownTimer);
     }
 
@@ -71,7 +69,14 @@ namespace SokobanGame
 
     private void BackHome(object sender, RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
+      NavigationService.Navigate(new WelcomePage());
+    }
+
+    private void initMap(int level)
+    {
+      GameLevelLabel.Content = "LEVEL #" + level.ToString();
+      HealthLabel.Content = "HEALTH: " + currentHealth.ToString();
+      MovesLabel.Content = "STEPS: " + currentSteps.ToString();
     }
   }
 }

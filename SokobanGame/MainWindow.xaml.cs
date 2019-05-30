@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SokobanGame
 {
@@ -20,19 +10,32 @@ namespace SokobanGame
   /// </summary>
   public partial class MainWindow : Window
   {
+    // For playing lobby music in background
+    MediaPlayer mediaPlayer = new MediaPlayer();
+
     public MainWindow()
     {
       InitializeComponent();
+
+      // Go to welcome page
       _NavigationFrame.Navigate(new WelcomePage());
+
+      // Start playing background music
+      string lobbyMusicPath = "../../../Resources/music/LobbyMusic.mp3";
+      mediaPlayer.Open(new Uri(lobbyMusicPath, UriKind.Relative));
+      mediaPlayer.Play();
     }
 
-    //private void StartGame(object sender, RoutedEventArgs e)
-    //{
-
-    //}
+    private void Media_Ended(object sender, EventArgs e)
+    {
+      // Start media from the top! On and on and on...
+      mediaPlayer.Position = TimeSpan.Zero;
+      mediaPlayer.Play();
+    }
 
     private void DragWindow(object sender, MouseButtonEventArgs e)
     {
+      // Implement a draggable window titlebar area
       if (e.ChangedButton == MouseButton.Left)
       {
         DragMove();

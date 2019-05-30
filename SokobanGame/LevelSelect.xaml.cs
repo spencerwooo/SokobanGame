@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SokobanGame
 {
@@ -21,6 +12,7 @@ namespace SokobanGame
   public partial class LevelSelect : Page
   {
     private int currentLevel = 1;
+    private int totalLevels = 11;
     public LevelSelect()
     {
       InitializeComponent();
@@ -30,7 +22,8 @@ namespace SokobanGame
     private void PlayLevel(object sender, RoutedEventArgs e)
     {
       // Start playing level
-      NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative), currentLevel.ToString());
+      // NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative), currentLevel.ToString());
+      NavigationService.Navigate(new GameMain(currentLevel));
     }
 
     private void BackHome(object sender, RoutedEventArgs e)
@@ -41,7 +34,7 @@ namespace SokobanGame
 
     private void NextLevel(object sender, RoutedEventArgs e)
     {
-      if (currentLevel >= 11)
+      if (currentLevel >= totalLevels)
       {
         currentLevel = 1;
       }
@@ -58,7 +51,7 @@ namespace SokobanGame
     {
       if (currentLevel <= 1)
       {
-        currentLevel = 11;
+        currentLevel = totalLevels;
       }
       else
       {
@@ -71,7 +64,7 @@ namespace SokobanGame
 
     private string imagePathBuilder(int level)
     {
-      string imagePath = "Resources/levels/level" + level.ToString() + ".png";
+      string imagePath = "/SokobanGame;component/Resources/levels/level" + level.ToString() + ".png";
       return imagePath;
     }
   }

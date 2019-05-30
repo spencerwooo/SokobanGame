@@ -9,8 +9,10 @@
       Title="LevelSelect">
 
     <Grid Background="#FF3D3433">
-        <Label x:Name="SelectedLevelLabel" Content="SELECTED LEVEL #1" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,14,0,0" 
-               VerticalAlignment="Top" Foreground="White" Height="52" Width="250" FontFamily="Peepo" FontSize="24" 
+        <Label x:Name="SelectedLevelLabel" Content="SELECTED LEVEL #1" HorizontalContentAlignment="Center" 
+               HorizontalAlignment="Center" Margin="0,14,0,0" 
+               VerticalAlignment="Top" Foreground="White" Height="52" Width="250" 
+               FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="24" 
                FontWeight="Bold"/>
         <Button Content="Button" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="50,0,0,0" 
                 VerticalAlignment="Center" Width="60" Height="60" BorderBrush="{x:Null}" Foreground="{x:Null}"
@@ -23,27 +25,27 @@
                 VerticalAlignment="Center" Width="60" Height="60" BorderBrush="{x:Null}" Foreground="{x:Null}"
                 Click="NextLevel">
             <Button.Background>
-                <ImageBrush ImageSource="Resources/right.png"/>
+                <ImageBrush ImageSource="/SokobanGame;component/Resources/right.png"/>
             </Button.Background>
         </Button>
         <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,380,0,0" 
                 VerticalAlignment="Top" Width="114" FontFamily="Peepo" FontSize="16" Click="PlayLevel" 
                 BorderBrush="{x:Null}" Foreground="White" Height="36">
             <Button.Background>
-                <ImageBrush ImageSource="Resources/startGameBtn.png"/>
+                <ImageBrush ImageSource="/SokobanGame;component/Resources/startGameBtn.png"/>
             </Button.Background>
         </Button>
         <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,20,0,391" 
                 VerticalAlignment="Center" Width="40" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}" 
                 Click="BackHome">
             <Button.Background>
-                <ImageBrush ImageSource="Resources/back.png"/>
+                <ImageBrush ImageSource="/SokobanGame;component/Resources/back.png"/>
             </Button.Background>
         </Button>
         <Rectangle Fill="#FF97B052" HorizontalAlignment="Center" Height="250" Margin="0,0,0,0" 
                    VerticalAlignment="Center" Width="350"/>
         <Image x:Name="LevelPreviewImage" HorizontalAlignment="Center" Height="200" Margin="0,0,0,0" 
-               VerticalAlignment="Center" Width="350" Stretch="Fill" Source="Resources/levels/level1.png"/>
+               VerticalAlignment="Center" Width="350" Stretch="Fill" Source="/SokobanGame;component/Resources/levels/level1.png"/>
 
     </Grid>
 </Page>

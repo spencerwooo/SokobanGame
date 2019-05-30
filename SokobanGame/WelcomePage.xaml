@@ -2,18 +2,29 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:SokobanGame"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="WelcomePage">
 
     <Grid Background="#FF3D3433">
-        <Image HorizontalAlignment="Center" Height="100" Margin="0,110,0,0" VerticalAlignment="Top" Width="550" Source="Resources/title.png" Stretch="Fill"/>
-        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,380,0,0" VerticalAlignment="Top" Width="114" FontFamily="Peepo" FontSize="16" Click="StartGame" BorderBrush="{x:Null}" Foreground="White" Height="36">
+        <Image HorizontalAlignment="Center" Height="100" Margin="0,80,0,0" VerticalAlignment="Top" Width="550" 
+               Source="/SokobanGame;component/Resources/title.png" Stretch="Fill"/>
+        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,350,0,0" 
+                VerticalAlignment="Top" Width="114" FontFamily="Peepo" FontSize="16" Click="StartGame" 
+                BorderBrush="{x:Null}" Foreground="White" Height="36">
             <Button.Background>
-                <ImageBrush ImageSource="Resources/startButton.png"/>
+                <ImageBrush ImageSource="/SokobanGame;component/Resources/startButton.png"/>
             </Button.Background>
         </Button>
+        <Image x:Name="PlayerIcon1" HorizontalAlignment="Left" Height="42" Margin="70,0,0,30" VerticalAlignment="Bottom" Width="31" 
+               Source="/SokobanGame;component/Resources/player/player1.png" Stretch="Fill"/>
+        <Image x:Name="PlayerIcon2" HorizontalAlignment="Left" Height="42" Margin="140,0,0,30" VerticalAlignment="Bottom" Width="31" 
+               Source="/SokobanGame;component/Resources/player/player2.png" Stretch="Fill"/>
+        <Image x:Name="PlayerIcon3" HorizontalAlignment="Left" Height="42" Margin="210,0,0,30" VerticalAlignment="Bottom" Width="31" 
+               Source="/SokobanGame;component/Resources/player/player3.png" Stretch="Fill"/>
+        <Label Content="©2019 Team Offline Flower" HorizontalAlignment="Right" Margin="0,0,40,30" VerticalAlignment="Bottom" 
+               Foreground="White" FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="14"/>
     </Grid>
 </Page>
