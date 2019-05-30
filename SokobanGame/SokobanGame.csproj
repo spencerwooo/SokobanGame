@@ -183,5 +183,15 @@
   <ItemGroup>
     <Resource Include="Resources\map\grass.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\levels\level10.png" />
+    <Resource Include="Resources\levels\level11.png" />
+    <Resource Include="Resources\levels\level4.png" />
+    <Resource Include="Resources\levels\level5.png" />
+    <Resource Include="Resources\levels\level6.png" />
+    <Resource Include="Resources\levels\level7.png" />
+    <Resource Include="Resources\levels\level8.png" />
+    <Resource Include="Resources\levels\level9.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

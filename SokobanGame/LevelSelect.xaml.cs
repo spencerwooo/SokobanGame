@@ -41,7 +41,7 @@ namespace SokobanGame
 
     private void NextLevel(object sender, RoutedEventArgs e)
     {
-      if (currentLevel >= 3)
+      if (currentLevel >= 11)
       {
         currentLevel = 1;
       }
@@ -58,7 +58,7 @@ namespace SokobanGame
     {
       if (currentLevel <= 1)
       {
-        currentLevel = 3;
+        currentLevel = 11;
       }
       else
       {
