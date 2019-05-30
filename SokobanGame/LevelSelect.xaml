@@ -46,6 +46,5 @@
                    VerticalAlignment="Center" Width="350"/>
         <Image x:Name="LevelPreviewImage" HorizontalAlignment="Center" Height="200" Margin="0,0,0,0" 
                VerticalAlignment="Center" Width="350" Stretch="Fill" Source="/SokobanGame;component/Resources/levels/level1.png"/>
-
     </Grid>
 </Page>

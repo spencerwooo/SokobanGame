@@ -209,7 +209,7 @@
     <Resource Include="Resources\levels\level9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\music\LobbyMusic.mp3" />
+    <EmbeddedResource Include="Resources\music\LobbyMusic.mp3" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\fonts\Peepo.ttf" />
