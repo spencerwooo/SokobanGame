@@ -6,9 +6,104 @@
       xmlns:local="clr-namespace:SokobanGame"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="GameMain">
+      Title="GameMain" Loaded="Page_Loaded" Unloaded="Page_Unloaded" KeyUp="Window_KeyUp">
 
     <Grid Background="#FF3D3433">
+        <Grid HorizontalAlignment="Center" Height="420" Margin="0,0,0,0" VerticalAlignment="Center" 
+              Width="600" Background="#FF97B052">
+            <Grid x:Name="MainMapGrid" HorizontalAlignment="Center" Height="315" Margin="0,0,0,0" VerticalAlignment="Center" 
+              Width="405">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image x:Name="Map00" Grid.Row="0" Grid.Column="0" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map01" Grid.Row="0" Grid.Column="1" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map02" Grid.Row="0" Grid.Column="2" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map03" Grid.Row="0" Grid.Column="3" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map04" Grid.Row="0" Grid.Column="4" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map05" Grid.Row="0" Grid.Column="5" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map06" Grid.Row="0" Grid.Column="6" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map07" Grid.Row="0" Grid.Column="7" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map08" Grid.Row="0" Grid.Column="8" Source="/SokobanGame;component/Resources/map/grass.png"/>
+
+                <Image x:Name="Map10" Grid.Row="1" Grid.Column="0" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map11" Grid.Row="1" Grid.Column="1" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map12" Grid.Row="1" Grid.Column="2" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map13" Grid.Row="1" Grid.Column="3" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map14" Grid.Row="1" Grid.Column="4" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map15" Grid.Row="1" Grid.Column="5" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map16" Grid.Row="1" Grid.Column="6" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map17" Grid.Row="1" Grid.Column="7" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map18" Grid.Row="1" Grid.Column="8" Source="/SokobanGame;component/Resources/map/grass.png"/>
+
+                <Image x:Name="Map20" Grid.Row="2" Grid.Column="0" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map21" Grid.Row="2" Grid.Column="1" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map22" Grid.Row="2" Grid.Column="2" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map23" Grid.Row="2" Grid.Column="3" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map24" Grid.Row="2" Grid.Column="4" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map25" Grid.Row="2" Grid.Column="5" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map26" Grid.Row="2" Grid.Column="6" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map27" Grid.Row="2" Grid.Column="7" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map28" Grid.Row="2" Grid.Column="8" Source="/SokobanGame;component/Resources/map/grass.png"/>
+
+                <Image x:Name="Map30" Grid.Row="3" Grid.Column="0" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map31" Grid.Row="3" Grid.Column="1" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map32" Grid.Row="3" Grid.Column="2" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map33" Grid.Row="3" Grid.Column="3" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map34" Grid.Row="3" Grid.Column="4" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map35" Grid.Row="3" Grid.Column="5" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map36" Grid.Row="3" Grid.Column="6" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map37" Grid.Row="3" Grid.Column="7" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map38" Grid.Row="3" Grid.Column="8" Source="/SokobanGame;component/Resources/map/grass.png"/>
+
+                <Image x:Name="Map40" Grid.Row="4" Grid.Column="0" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map41" Grid.Row="4" Grid.Column="1" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map42" Grid.Row="4" Grid.Column="2" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map43" Grid.Row="4" Grid.Column="3" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map44" Grid.Row="4" Grid.Column="4" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map45" Grid.Row="4" Grid.Column="5" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map46" Grid.Row="4" Grid.Column="6" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map47" Grid.Row="4" Grid.Column="7" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map48" Grid.Row="4" Grid.Column="8" Source="/SokobanGame;component/Resources/map/grass.png"/>
+
+                <Image x:Name="Map50" Grid.Row="5" Grid.Column="0" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map51" Grid.Row="5" Grid.Column="1" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map52" Grid.Row="5" Grid.Column="2" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map53" Grid.Row="5" Grid.Column="3" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map54" Grid.Row="5" Grid.Column="4" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map55" Grid.Row="5" Grid.Column="5" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map56" Grid.Row="5" Grid.Column="6" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map57" Grid.Row="5" Grid.Column="7" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map58" Grid.Row="5" Grid.Column="8" Source="/SokobanGame;component/Resources/map/grass.png"/>
+
+                <Image x:Name="Map60" Grid.Row="6" Grid.Column="0" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map61" Grid.Row="6" Grid.Column="1" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map62" Grid.Row="6" Grid.Column="2" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map63" Grid.Row="6" Grid.Column="3" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map64" Grid.Row="6" Grid.Column="4" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map65" Grid.Row="6" Grid.Column="5" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map66" Grid.Row="6" Grid.Column="6" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map67" Grid.Row="6" Grid.Column="7" Source="/SokobanGame;component/Resources/map/grass.png"/>
+                <Image x:Name="Map68" Grid.Row="6" Grid.Column="8" Source="/SokobanGame;component/Resources/map/grass.png"/>
+            </Grid>
+        </Grid>
         <Button Content="Button" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,20,0,0" 
                 VerticalAlignment="Top" Width="40" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="GoBack">
             <Button.Background>
@@ -19,8 +114,8 @@
                Source="/SokobanGame;component/Resources/stats/time.png"/>
         <TextBlock x:Name="CountDownTimer" HorizontalAlignment="Left" Margin="678,31,0,0" VerticalAlignment="Top" 
                    FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="18" Foreground="White" FontWeight="Bold"/>
-        <Rectangle Fill="#FF97b052" HorizontalAlignment="Center" Height="350" Margin="0,0,0,0" Stroke="Black" 
-                   VerticalAlignment="Center" Width="350"/>
+        <!--<Rectangle Fill="#FF97b052" HorizontalAlignment="Center" Height="350" Margin="0,0,0,0" Stroke="Black" 
+                   VerticalAlignment="Center" Width="350"/>-->
         <Image HorizontalAlignment="Left" Height="40" Margin="630,313,0,0" VerticalAlignment="Top" Width="40" 
                Source="/SokobanGame;component/Resources/stats/health.png"/>
         <Label x:Name="GameLevelLabel" Content="LEVEL #1" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" 

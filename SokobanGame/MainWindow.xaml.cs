@@ -24,7 +24,7 @@ namespace SokobanGame
       _NavigationFrame.Navigate(new WelcomePage());
 
       // Start playing background music
-      string lobbyMusicPath = "../../../Resources/music/LobbyMusic.mp3";
+      string lobbyMusicPath = "Resources/music/LobbyMusic.mp3";
 
       //MediaPlayerElement.Source = new Uri(lobbyMusicPath, UriKind.Relative);
 
@@ -51,7 +51,8 @@ namespace SokobanGame
 
     private void CloseWindow(object sender, RoutedEventArgs e)
     {
-      var result = MessageBox.Show("Do you really want to quit?", "Quit Game", MessageBoxButton.YesNo, MessageBoxImage.Question);
+      var result = MessageBox.Show("Do you really want to quit?", "Quit Game", 
+        MessageBoxButton.YesNo, MessageBoxImage.Question);
       if (result == MessageBoxResult.Yes)
       {
         Close();
