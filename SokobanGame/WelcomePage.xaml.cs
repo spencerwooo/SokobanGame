@@ -26,7 +26,7 @@ namespace SokobanGame
     private void StartGame(object sender, RoutedEventArgs e)
     {
       // Go on to level select.
-      NavigationService.Navigate(new LevelSelect());
+      NavigationService.Navigate(new LevelSelect(1));
     }
 
     private void jumpAnimation(Image target, double newY, double duration)

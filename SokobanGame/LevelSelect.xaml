@@ -37,8 +37,8 @@
                 <ImageBrush ImageSource="/SokobanGame;component/Resources/startGameBtn.png"/>
             </Button.Background>
         </Button>
-        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,20,0,391" 
-                VerticalAlignment="Center" Width="40" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}" 
+        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,20,0,0" 
+                VerticalAlignment="Top" Width="40" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}" 
                 Click="BackHome">
             <Button.Background>
                 <ImageBrush ImageSource="/SokobanGame;component/Resources/back.png"/>
@@ -48,5 +48,16 @@
                    VerticalAlignment="Center" Width="350"/>
         <Image x:Name="LevelPreviewImage" HorizontalAlignment="Center" Height="200" Margin="0,0,0,0" 
                VerticalAlignment="Center" Width="350" Stretch="Fill" Source="/SokobanGame;component/Resources/levels/level1.png"/>
+        <Rectangle x:Name="LevelPreviewMask" Fill="#FF3D3433" HorizontalAlignment="Center" Height="250" Margin="0,0,0,0" 
+                   VerticalAlignment="Center" Width="350" Opacity="0"/>
+        <Image x:Name="LevelStatus" HorizontalAlignment="Left" Height="32" Margin="530,304,0,0" VerticalAlignment="Top" 
+               Width="32" Source="Resources/stats/star.png" Stretch="None"/>
+        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Right" Margin="0,30,30,0" 
+            VerticalAlignment="Top" Width="75" Height="30" BorderBrush="{x:Null}" Foreground="{x:Null}" 
+            Click="ResetGame">
+            <Button.Background>
+                <ImageBrush ImageSource="Resources/reset.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

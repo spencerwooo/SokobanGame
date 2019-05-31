@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
@@ -123,8 +124,8 @@ namespace SokobanGame
         MessageBoxButton.YesNo, MessageBoxImage.Question);
       if (result == MessageBoxResult.Yes)
       {
-        // NavigationService.Navigate(new Uri("LevelSelect.xaml", UriKind.Relative));
-        NavigationService.GoBack();
+        NavigationService.Navigate(new LevelSelect(gameLevel));
+        // NavigationService.GoBack();
       }
       else
       {
@@ -143,6 +144,8 @@ namespace SokobanGame
       GameLevelLabel.Content = "LEVEL #" + level.ToString();
       HealthLabel.Content = "HEALTH: " + currentHealth.ToString();
       MovesLabel.Content = "STEPS: " + currentSteps.ToString();
+
+      Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
 
       renderMap();
     }
@@ -210,12 +213,20 @@ namespace SokobanGame
         if (gameLevel < 11)
         {
           MessageBox.Show("You've won! Next level.");
+
+          Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
+          Properties.Settings.Default.Save();
+
           gameLevel++;
           NavigationService.Navigate(new GameMain(gameLevel));
         }
         else
         {
           MessageBox.Show("You've completed all! Back home.");
+
+          Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
+          Properties.Settings.Default.Save();
+
           gameLevel = 1;
           NavigationService.Navigate(new WelcomePage());
         }

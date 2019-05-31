@@ -94,6 +94,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Settings.cs" />
     <Compile Include="WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
@@ -225,6 +226,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\reset.png" />
+    <Resource Include="Resources\stats\no.png" />
+    <Resource Include="Resources\stats\star.png" />
     <Resource Include="Resources\map\target.png" />
     <Resource Include="Resources\player\player1-1.png" />
     <Resource Include="Resources\player\player2-1.png" />

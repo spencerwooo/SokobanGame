@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -14,23 +15,38 @@ namespace SokobanGame
     private int currentLevel = 1;
     private int totalLevels = 11;
 
-    public LevelSelect()
+    public LevelSelect(int currentLevel)
     {
       InitializeComponent();
-      SelectedLevelLabel.Content = "SELECT LEVEL #" + currentLevel;
+
+      this.currentLevel = currentLevel;
+
+      string imagePath = imagePathBuilder(currentLevel);
+      LevelPreviewImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+
+      SelectedLevelLabel.Content = "SELECTED LEVEL #" + currentLevel;
     }
 
     private void PlayLevel(object sender, RoutedEventArgs e)
     {
       // Start playing level
       // NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative), currentLevel.ToString());
-      NavigationService.Navigate(new GameMain(currentLevel));
+      string levelSucceeded = Properties.Settings.Default.LevelSucceeded[currentLevel - 1];
+      if (levelSucceeded == "true")
+      {
+        NavigationService.Navigate(new GameMain(currentLevel));
+      }
+      else
+      {
+        MessageBox.Show("You need to complete the previous levels first.");
+      }
+
     }
 
     private void BackHome(object sender, RoutedEventArgs e)
     {
-      // NavigationService.Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
-      NavigationService.GoBack();
+      NavigationService.Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
+      // NavigationService.GoBack();
     }
 
     private void NextLevel(object sender, RoutedEventArgs e)
@@ -43,9 +59,22 @@ namespace SokobanGame
       {
         currentLevel += 1;
       }
+
       string imagePath = imagePathBuilder(currentLevel);
       LevelPreviewImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-      SelectedLevelLabel.Content = "SELECT LEVEL #" + currentLevel;
+      SelectedLevelLabel.Content = "SELECTED LEVEL #" + currentLevel;
+
+      string levelSucceeded = Properties.Settings.Default.LevelSucceeded[currentLevel - 1];
+      if (levelSucceeded == "true")
+      {
+        LevelStatus.Source = new BitmapImage(new Uri("/SokobanGame;component/Resources/stats/star.png", UriKind.Relative));
+        LevelPreviewMask.Opacity = 0.0;
+      }
+      else
+      {
+        LevelStatus.Source = new BitmapImage(new Uri("/SokobanGame;component/Resources/stats/no.png", UriKind.Relative));
+        LevelPreviewMask.Opacity = 0.8;
+      }
     }
 
     private void PreviousLevel(object sender, RoutedEventArgs e)
@@ -58,9 +87,42 @@ namespace SokobanGame
       {
         currentLevel -= 1;
       }
+
       string imagePath = imagePathBuilder(currentLevel);
       LevelPreviewImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
       SelectedLevelLabel.Content = "SELECTED LEVEL #" + currentLevel;
+
+      string levelSucceeded = Properties.Settings.Default.LevelSucceeded[currentLevel - 1];
+      if (levelSucceeded == "true")
+      {
+        LevelStatus.Source = new BitmapImage(new Uri("/SokobanGame;component/Resources/stats/star.png", UriKind.Relative));
+        LevelPreviewMask.Opacity = 0.0;
+      }
+      else
+      {
+        LevelStatus.Source = new BitmapImage(new Uri("/SokobanGame;component/Resources/stats/no.png", UriKind.Relative));
+        LevelPreviewMask.Opacity = 0.8;
+      }
+    }
+
+    private void ResetGame(object sender, RoutedEventArgs e)
+    {
+      var result = MessageBox.Show("Are you sure to wipe game history?", "Reset Game",
+        MessageBoxButton.YesNo, MessageBoxImage.Question);
+      if (result == MessageBoxResult.Yes)
+      {
+        for (int i = 0; i < 11; i++)
+        {
+          Console.WriteLine(i + ": " + Properties.Settings.Default.LevelSucceeded[i]);
+          Properties.Settings.Default.LevelSucceeded[i] = "false";
+        }
+        Properties.Settings.Default.LevelSucceeded[0] = "true";
+        Properties.Settings.Default.Save();
+      }
+      else
+      {
+        // Do nothing.
+      }
     }
 
     private string imagePathBuilder(int level)
