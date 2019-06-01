@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -21,6 +22,9 @@ namespace SokobanGame
     private int gameLevel;
     private int currentHealth = 3;
     private int currentSteps = 0;
+
+    private Storyboard countdownStoryboard = new Storyboard();
+    private StringAnimationUsingKeyFrames countDownAnimation = new StringAnimationUsingKeyFrames();
 
     // Map
     StringBuilder mapString = new StringBuilder(70);
@@ -52,9 +56,11 @@ namespace SokobanGame
       { 'T', "/SokobanGame;component/Resources/map/target.png" },
       { 'F', "/SokobanGame;component/Resources/map/box.png" },
       { 'W', "/SokobanGame;component/Resources/map/wall.png" },
-      { 'G', "/SokobanGame;component/Resources/map/grass.png" },
-
+      { 'G', "/SokobanGame;component/Resources/map/grass.png" }
     };
+
+    // Heart stickers dictionary
+    private Dictionary<string, Image> heartImageDict = new Dictionary<string, Image> { };
 
     // Game core logics, in Assembly
     [DllImport("SokobanASM.dll")]
@@ -74,26 +80,28 @@ namespace SokobanGame
       mapElements['Q'] = "/SokobanGame;component/Resources/player/player" + player + "-1.png";
 
       initMap(gameLevel);
-
-      startCountDown(CountDownTimer);
     }
 
     // Attach window key up event to page
     private void Page_Loaded(object sender, RoutedEventArgs e)
     {
       Application.Current.MainWindow.KeyUp += new KeyEventHandler(Window_KeyUp);
+      startCountDown(CountDownTimer);
     }
 
     // Remove window key up event on page unloaded event
     private void Page_Unloaded(object sender, RoutedEventArgs e)
     {
       Application.Current.MainWindow.KeyUp -= Window_KeyUp;
+      // Remove countdown callback event on page unloaded
+      countdownStoryboard.Completed -= CountdownTimerCompleted;
+      countdownStoryboard.Stop(this);
+      countdownStoryboard.Children.Remove(countDownAnimation);
     }
 
     private void startCountDown(FrameworkElement target)
     {
-      var countDownAnimation = new StringAnimationUsingKeyFrames();
-      var remainingTime = 60;
+      var remainingTime = 120;
 
       for (var i = remainingTime; i > 0; i--)
       {
@@ -107,7 +115,6 @@ namespace SokobanGame
       Storyboard.SetTargetName(countDownAnimation, target.Name);
       Storyboard.SetTargetProperty(countDownAnimation, new PropertyPath(TextBlock.TextProperty));
 
-      var countdownStoryboard = new Storyboard();
       countdownStoryboard.Children.Add(countDownAnimation);
       countdownStoryboard.Completed += CountdownTimerCompleted;
       countdownStoryboard.Begin(this);
@@ -155,7 +162,7 @@ namespace SokobanGame
       // Get map from control
       control(mapString, levelParams[gameLevel]);
       string mapMatrix = mapString.ToString();
-      Console.WriteLine(mapMatrix);
+      // Console.WriteLine(mapMatrix);
 
       // Render map elements
       for (int i = 0; i < 7; i++)
@@ -164,8 +171,33 @@ namespace SokobanGame
         {
           // Map element at Row i Col j is Map[i * 9 + j]
           char elementName = mapMatrix[i * 9 + j];
-          var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
+          Image mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
           mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+
+          if (elementName == 'T' || elementName == 'F')
+          {
+            Image heartyImage = new Image();
+            heartyImage.Height = 38;
+            heartyImage.Width = 32;
+            heartyImage.Source = new BitmapImage(new Uri("/SokobanGame;component/Resources/map/heart.png", UriKind.Relative));
+            heartyImage.Stretch = Stretch.None;
+            heartyImage.RenderTransformOrigin = new Point(0.5, 0.5);
+            heartyImage.Visibility = Visibility.Hidden;
+            TranslateTransform translateTransform = new TranslateTransform();
+            translateTransform.Y = -20;
+            heartyImage.RenderTransform = translateTransform;
+
+            heartImageDict.Add(i.ToString() + j.ToString(), heartyImage);
+
+            MainMapGrid.Children.Add(heartyImage);
+            Grid.SetRow(heartyImage, i);
+            Grid.SetColumn(heartyImage, j);
+          }
+
+          if (elementName == 'F')
+          {
+            heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Visible;
+          }
         }
       }
     }
@@ -201,6 +233,18 @@ namespace SokobanGame
           char elementName = mapMatrix[i * 9 + j];
           var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
           mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+
+          if (elementName == 'F')
+          {
+            heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Visible;
+          }
+          else
+          {
+            if (heartImageDict.ContainsKey(i.ToString() + j.ToString()))
+            {
+              heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Hidden;
+            }
+          }
         }
       }
 
