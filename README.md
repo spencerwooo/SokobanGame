@@ -31,3 +31,12 @@ A Sokoban Game implemented with WPF, and Assembly in its core.
 ### 核心业务逻辑
 
 使用 Windows 平台下，`.386` 模式下编写的 x86 汇编。
+
+
+---
+
+🎮 **Sokoban Game** ©2019 Team Offline Flower. Released under the MIT License.
+
+Authored by Spencer Woo. Maintained by [@Felinae Tang](https://github.com/felinae98), [@Garvey Lau](https://github.com/garvey98) and [@Liz Li](https://github.com/LiZ-Samsara). Team Offline Flower, all rights reserved.
+
+[@Blog](https://spencerwoo.com/) · [ⒿJike](https://web.okjike.com/user/4DDA0425-FB41-4188-89E4-952CA15E3C5E/post) · [@GitHub](https://github.com/spencerwooo)
