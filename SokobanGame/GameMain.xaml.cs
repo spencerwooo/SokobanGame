@@ -112,7 +112,7 @@ namespace SokobanGame
         countDownAnimation.KeyFrames.Add(frame);
       }
 
-      countDownAnimation.KeyFrames.Add(new DiscreteStringKeyFrame("Time's up!", 
+      countDownAnimation.KeyFrames.Add(new DiscreteStringKeyFrame("Time's up!",
         KeyTime.FromTimeSpan(TimeSpan.FromSeconds(remainingTime + 1))));
       Storyboard.SetTargetName(countDownAnimation, target.Name);
       Storyboard.SetTargetProperty(countDownAnimation, new PropertyPath(TextBlock.TextProperty));
@@ -129,7 +129,7 @@ namespace SokobanGame
 
     private void GoBack(object sender, RoutedEventArgs e)
     {
-      var result = MessageBox.Show("Do you really want to leave this level?", "Abort level", 
+      var result = MessageBox.Show("Do you really want to leave this level?", "Abort level",
         MessageBoxButton.YesNo, MessageBoxImage.Question);
       if (result == MessageBoxResult.Yes)
       {

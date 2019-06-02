@@ -2,8 +2,6 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
 
 namespace SokobanGame
 {
@@ -51,7 +49,7 @@ namespace SokobanGame
 
     private void CloseWindow(object sender, RoutedEventArgs e)
     {
-      var result = MessageBox.Show("Do you really want to quit?", "Quit Game", 
+      var result = MessageBox.Show("Do you really want to quit?", "Quit Game",
         MessageBoxButton.YesNo, MessageBoxImage.Question);
       if (result == MessageBoxResult.Yes)
       {
