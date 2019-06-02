@@ -8,12 +8,12 @@
       d:DesignHeight="530" d:DesignWidth="900"
       Title="WelcomePage">
 
-    <Grid Background="#FF3D3433">
+    <Grid Background="#FF3D3433" Margin="0">
         <Image HorizontalAlignment="Center" Height="100" Margin="0,80,0,0" VerticalAlignment="Top" Width="550" 
                Source="/SokobanGame;component/Resources/title.png" Stretch="Fill"/>
-        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,400,0,0" 
-                VerticalAlignment="Top" Width="114" FontFamily="Peepo" FontSize="16" Click="StartGame" 
-                BorderBrush="{x:Null}" Foreground="White" Height="36">
+        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,374,0,0" 
+                VerticalAlignment="Top" Width="165" FontFamily="Peepo" FontSize="16" Click="StartGame" 
+                BorderBrush="{x:Null}" Foreground="White" Height="51">
             <Button.Background>
                 <ImageBrush ImageSource="/SokobanGame;component/Resources/startButton.png"/>
             </Button.Background>

@@ -103,7 +103,7 @@ namespace SokobanGame
 
     private void startCountDown(FrameworkElement target)
     {
-      var remainingTime = 120;
+      var remainingTime = 5;
 
       for (var i = remainingTime; i > 0; i--)
       {
@@ -124,7 +124,7 @@ namespace SokobanGame
 
     private void CountdownTimerCompleted(object sender, EventArgs e)
     {
-      MessageBox.Show("Time's up!");
+      NavigationService.Navigate(new GameScore(gameLevel, 0));
     }
 
     private void GoBack(object sender, RoutedEventArgs e)
@@ -256,26 +256,10 @@ namespace SokobanGame
 
       if (gameResult == 1)
       {
-        if (gameLevel < 11)
-        {
-          MessageBox.Show("You've won! Next level.");
+        Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
+        Properties.Settings.Default.Save();
 
-          Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
-          Properties.Settings.Default.Save();
-
-          gameLevel++;
-          NavigationService.Navigate(new GameMain(gameLevel));
-        }
-        else
-        {
-          MessageBox.Show("You've completed all! Back home.");
-
-          Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
-          Properties.Settings.Default.Save();
-
-          gameLevel = 1;
-          NavigationService.Navigate(new WelcomePage());
-        }
+        NavigationService.Navigate(new GameScore(gameLevel, 1));
       }
     }
 

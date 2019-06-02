@@ -94,11 +94,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameScore.xaml.cs">
+      <DependentUpon>GameScore.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="WelcomePage.xaml.cs">
       <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
     <Page Include="GameMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameScore.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,8 +246,11 @@
     <Resource Include="Resources\map\heart.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\rip.png" />
+    <Resource Include="Resources\award.png" />
     <Resource Include="Resources\goback.png" />
     <Resource Include="Resources\restart.png" />
+    <Resource Include="Resources\continue.png" />
     <Content Include="SokobanASM.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

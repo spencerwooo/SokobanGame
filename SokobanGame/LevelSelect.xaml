@@ -30,9 +30,9 @@
                 <ImageBrush ImageSource="/SokobanGame;component/Resources/right.png"/>
             </Button.Background>
         </Button>
-        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,450,0,0" 
-                VerticalAlignment="Top" Width="114" FontFamily="Peepo" FontSize="16" Click="PlayLevel" 
-                BorderBrush="{x:Null}" Foreground="White" Height="36">
+        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,443,0,0" 
+                VerticalAlignment="Top" Width="149" FontFamily="Peepo" FontSize="16" Click="PlayLevel" 
+                BorderBrush="{x:Null}" Foreground="White" Height="47">
             <Button.Background>
                 <ImageBrush ImageSource="/SokobanGame;component/Resources/startGameBtn.png"/>
             </Button.Background>
