@@ -1,8 +1,14 @@
-# Sokoban Game
+# 🎮 Sokoban Game
 
-A Sokoban Game implemented with WPF, and Assembly in its core.
+![](https://flat.badgen.net/badge/汇编语言/课程设计/yellow)
+![](https://flat.badgen.net/badge/platform/Windows/blue?icon=windows)
+![](https://flat.badgen.net/badge/license/MIT/red)
 
+> A Sokoban Game, implemented by WPF. Core logics implemented by x86 assembly. 
+> 
 > 俗称，推箱子。
+
+## 界面
 
 |                        Welcome Page                       |                   Level Select (Played)                   |
 |:---------------------------------------------------------:|:---------------------------------------------------------:|
