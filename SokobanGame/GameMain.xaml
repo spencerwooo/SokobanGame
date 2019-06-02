@@ -9,8 +9,8 @@
       Title="GameMain" Loaded="Page_Loaded" Unloaded="Page_Unloaded" KeyUp="Window_KeyUp">
 
     <Grid Background="#FF3D3433">
-        <Grid HorizontalAlignment="Center" Height="420" Margin="0,0,0,0" VerticalAlignment="Center" 
-              Width="600" Background="#FF97B052">
+        <Grid HorizontalAlignment="Center" Height="340" Margin="0,0,0,0" VerticalAlignment="Center" 
+              Width="430" Background="#FF97B052">
             <Grid x:Name="MainMapGrid" HorizontalAlignment="Center" Height="315" Margin="0,0,0,0" VerticalAlignment="Center" 
               Width="405">
                 <Grid.RowDefinitions>
@@ -116,15 +116,29 @@
                    FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="18" Foreground="White" FontWeight="Bold"/>
         <!--<Rectangle Fill="#FF97b052" HorizontalAlignment="Center" Height="350" Margin="0,0,0,0" Stroke="Black" 
                    VerticalAlignment="Center" Width="350"/>-->
-        <Image HorizontalAlignment="Left" Height="40" Margin="630,313,0,0" VerticalAlignment="Top" Width="40" 
+        <Image HorizontalAlignment="Left" Height="40" Margin="631,329,0,0" VerticalAlignment="Top" Width="40" 
                Source="/SokobanGame;component/Resources/stats/health.png"/>
-        <Label x:Name="GameLevelLabel" Content="LEVEL #1" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" 
+        <Label x:Name="GameLevelLabel" Content="LEVEL #1" HorizontalAlignment="Left" Margin="20,140,0,0" VerticalAlignment="Top" 
                FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="32" Foreground="White" FontWeight="Bold"/>
-        <Label x:Name="HealthLabel" Content="Health" HorizontalAlignment="Left" Margin="680,306,0,0" VerticalAlignment="Top" 
+        <Label x:Name="HealthLabel" Content="Health" HorizontalAlignment="Left" Margin="681,322,0,0" VerticalAlignment="Top" 
                FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="18" Foreground="White" FontWeight="Bold"/>
-        <Image HorizontalAlignment="Left" Height="40" Margin="630,363,0,0" VerticalAlignment="Top" Width="40" 
+        <Image HorizontalAlignment="Left" Height="40" Margin="631,379,0,0" VerticalAlignment="Top" Width="40" 
                Source="/SokobanGame;component/Resources/stats/moves.png"/>
-        <Label x:Name="MovesLabel" Content="Moves" HorizontalAlignment="Left" Margin="680,363,0,0" VerticalAlignment="Top" 
+        <Label x:Name="MovesLabel" Content="Moves" HorizontalAlignment="Left" Margin="681,379,0,0" VerticalAlignment="Top" 
                FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="18" Foreground="White" FontWeight="Bold"/>
+        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,310,0,0" 
+            VerticalAlignment="Top" Width="87.5" Height="35" BorderBrush="{x:Null}" Foreground="{x:Null}" 
+            Click="GoBackOneStep">
+            <Button.Background>
+                <ImageBrush ImageSource="/SokobanGame;component/Resources/goback.png"/>
+            </Button.Background>
+        </Button>
+        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,375,0,0" 
+            VerticalAlignment="Top" Width="87.5" Height="35" BorderBrush="{x:Null}" Foreground="{x:Null}" 
+            Click="RestartGame">
+            <Button.Background>
+                <ImageBrush ImageSource="/SokobanGame;component/Resources/restart.png"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

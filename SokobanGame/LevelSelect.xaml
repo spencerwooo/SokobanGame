@@ -56,7 +56,7 @@
             VerticalAlignment="Top" Width="75" Height="30" BorderBrush="{x:Null}" Foreground="{x:Null}" 
             Click="ResetGame">
             <Button.Background>
-                <ImageBrush ImageSource="Resources/reset.png"/>
+                <ImageBrush ImageSource="/SokobanGame;component/Resources/reset.png"/>
             </Button.Background>
         </Button>
     </Grid>

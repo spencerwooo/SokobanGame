@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
@@ -56,7 +55,8 @@ namespace SokobanGame
       { 'T', "/SokobanGame;component/Resources/map/target.png" },
       { 'F', "/SokobanGame;component/Resources/map/box.png" },
       { 'W', "/SokobanGame;component/Resources/map/wall.png" },
-      { 'G', "/SokobanGame;component/Resources/map/grass.png" }
+      { 'G', "/SokobanGame;component/Resources/map/grass.png" },
+      { 'E', "" }
     };
 
     // Heart stickers dictionary
@@ -92,7 +92,9 @@ namespace SokobanGame
     // Remove window key up event on page unloaded event
     private void Page_Unloaded(object sender, RoutedEventArgs e)
     {
+      // Remove key up listener
       Application.Current.MainWindow.KeyUp -= Window_KeyUp;
+
       // Remove countdown callback event on page unloaded
       countdownStoryboard.Completed -= CountdownTimerCompleted;
       countdownStoryboard.Stop(this);
@@ -274,6 +276,25 @@ namespace SokobanGame
           gameLevel = 1;
           NavigationService.Navigate(new WelcomePage());
         }
+      }
+    }
+
+    private void GoBackOneStep(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void RestartGame(object sender, RoutedEventArgs e)
+    {
+      var result = MessageBox.Show("Are you sure to restart level?", "Restart level",
+        MessageBoxButton.YesNo, MessageBoxImage.Question);
+      if (result == MessageBoxResult.Yes)
+      {
+        NavigationService.Navigate(new GameMain(gameLevel));
+      }
+      else
+      {
+        // Do nothing.
       }
     }
   }
