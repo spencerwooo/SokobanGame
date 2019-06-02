@@ -103,7 +103,7 @@ namespace SokobanGame
 
     private void startCountDown(FrameworkElement target)
     {
-      var remainingTime = 5;
+      var remainingTime = 120;
 
       for (var i = remainingTime; i > 0; i--)
       {
