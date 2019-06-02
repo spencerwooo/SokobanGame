@@ -8,6 +8,8 @@
 > 
 > 俗称，推箱子。
 
+Sokoban core assembly repo at: [felinae98/SokobanASM](https://github.com/felinae98/SokobanASM).
+
 ## 界面
 
 |                        Welcome Page                       |                   Level Select (Played)                   |
