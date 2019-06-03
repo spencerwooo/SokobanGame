@@ -20,7 +20,7 @@
             </Button>
             <Image HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Height="22" Source="Resources/icon.png"/>
             <Label Content="Retro Sokoban" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" 
-                   Background="Transparent" Foreground="White"/>
+                   Background="Transparent" Foreground="White" FontFamily="/SokobanGame;component/Resources/fonts/#Peepo"/>
             <Frame x:Name="_NavigationFrame" NavigationUIVisibility="Hidden" Margin="0,30,0,0" />
         </Grid>
     </DockPanel>

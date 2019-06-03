@@ -118,8 +118,8 @@
                    VerticalAlignment="Center" Width="350"/>-->
         <Image HorizontalAlignment="Left" Height="40" Margin="27,210,0,0" VerticalAlignment="Top" Width="40" 
                Source="/SokobanGame;component/Resources/stats/health.png"/>
-        <Label x:Name="GameLevelLabel" Content="LEVEL #1" HorizontalAlignment="Left" Margin="768,230,-33,244" VerticalAlignment="Center" 
-               FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="36" Foreground="White" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" Width="165">
+        <Label x:Name="GameLevelLabel" Content="LEVEL #1" HorizontalAlignment="Left" Margin="701,274,-100,194" VerticalAlignment="Center" 
+               FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="36" Foreground="White" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" Width="299">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
