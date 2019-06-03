@@ -19,9 +19,11 @@ namespace SokobanGame
   {
     // Game main attributes
     private int gameLevel;
-    private int currentHealth = 3;
-    private int currentSteps = 0;
+    private int currentHealth;
+    private int currentSteps;
+    private int currentStatus;
 
+    // Count down storyboard
     private Storyboard countdownStoryboard = new Storyboard();
     private StringAnimationUsingKeyFrames countDownAnimation = new StringAnimationUsingKeyFrames();
 
@@ -142,20 +144,19 @@ namespace SokobanGame
       }
     }
 
-    private void BackHome(object sender, RoutedEventArgs e)
-    {
-      NavigationService.Navigate(new WelcomePage());
-    }
-
     private void initMap(int level)
     {
       // Init values
       GameLevelLabel.Content = "LEVEL #" + level.ToString();
-      HealthLabel.Content = "HEALTH: " + currentHealth.ToString();
-      MovesLabel.Content = "STEPS: " + currentSteps.ToString();
 
+      // Init game parameters
+      MovesLabel.Content = "STEPS: " + 0;
+      HealthLabel.Content = "HEALTH: " + 5;
+
+      // Update game preferences
       Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
 
+      // Render game level map
       renderMap();
     }
 
@@ -206,6 +207,14 @@ namespace SokobanGame
 
     private void Window_KeyUp(object sender, KeyEventArgs e)
     {
+      // [WPF keypress event error]
+      // Key_up event fires twice because of unhandled "e"
+      // See: https://stackoverflow.com/questions/22012948/keydown-event-fires-twice
+      if (e.Handled)
+      {
+        return;
+      }
+
       int gameResult = 0;
 
       switch (e.Key)
@@ -224,48 +233,109 @@ namespace SokobanGame
           break;
       }
 
-      string mapMatrix = mapString.ToString();
-
-      // Render map elements
-      for (int i = 0; i < 7; i++)
-      {
-        for (int j = 0; j < 9; j++)
-        {
-          // Map element at Row i Col j is Map[i * 9 + j]
-          char elementName = mapMatrix[i * 9 + j];
-          var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
-          mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
-
-          if (elementName == 'F')
-          {
-            heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Visible;
-          }
-          else
-          {
-            if (heartImageDict.ContainsKey(i.ToString() + j.ToString()))
-            {
-              heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Hidden;
-            }
-          }
-        }
-      }
-
       // Render statistics
-      currentSteps++;
-      MovesLabel.Content = "STEPS: " + currentSteps.ToString();
+      currentSteps = gameResult & 0xffff;
+      currentHealth = (gameResult & 0xff0000) >> 16;
+      currentStatus = gameResult >> 24;
 
-      if (gameResult == 1)
+      MovesLabel.Content = "STEPS: " + currentSteps.ToString();
+      HealthLabel.Content = "HEALTH: " + currentHealth.ToString();
+
+      if (currentStatus == 0)
       {
         Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
         Properties.Settings.Default.Save();
 
         NavigationService.Navigate(new GameScore(gameLevel, 1));
       }
+      else if (currentStatus == 2)
+      {
+        MessageBox.Show("Fuck off.");
+      }
+      else if (currentStatus == 3)
+      {
+        MessageBox.Show("No more backsies.");
+      }
+      else
+      {
+        string mapMatrix = mapString.ToString();
+        Console.WriteLine(mapMatrix);
+        // Render map elements
+        for (int i = 0; i < 7; i++)
+        {
+          for (int j = 0; j < 9; j++)
+          {
+            // Map element at Row i Col j is Map[i * 9 + j]
+            char elementName = mapMatrix[i * 9 + j];
+            var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
+            mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+
+            if (elementName == 'F')
+            {
+              heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Visible;
+            }
+            else
+            {
+              if (heartImageDict.ContainsKey(i.ToString() + j.ToString()))
+              {
+                heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Hidden;
+              }
+            }
+          }
+        }
+      }
+
+      // [Handles WPF keypress event error]
+      e.Handled = true;
     }
 
     private void GoBackOneStep(object sender, RoutedEventArgs e)
     {
+      int result = control(mapString, 0x20);
+      currentSteps = result & 0xffff;
+      currentHealth = (result & 0xff0000) >> 16;
+      currentStatus = result >> 24;
 
+      HealthLabel.Content = "HEALTH: " + currentHealth.ToString();
+      MovesLabel.Content = "STEPS: " + currentSteps.ToString();
+
+      if (currentStatus == 2)
+      {
+        MessageBox.Show("Fuck off.");
+      }
+      else if (currentStatus == 3)
+      {
+        MessageBox.Show("No more backsies.");
+      }
+      else
+      {
+        string mapMatrix = mapString.ToString();
+        Console.WriteLine(mapMatrix);
+
+        // Render map elements
+        for (int i = 0; i < 7; i++)
+        {
+          for (int j = 0; j < 9; j++)
+          {
+            // Map element at Row i Col j is Map[i * 9 + j]
+            char elementName = mapMatrix[i * 9 + j];
+            var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
+            mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+
+            if (elementName == 'F')
+            {
+              heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Visible;
+            }
+            else
+            {
+              if (heartImageDict.ContainsKey(i.ToString() + j.ToString()))
+              {
+                heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Hidden;
+              }
+            }
+          }
+        }
+      }
     }
 
     private void RestartGame(object sender, RoutedEventArgs e)
