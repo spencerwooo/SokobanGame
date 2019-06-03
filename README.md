@@ -1,6 +1,6 @@
 <div align="center">
   
-<h1>🎮</h1>
+<img src="https://i.loli.net/2019/06/03/5cf518fcd23cb88530.png" alt="icon" width="60" />
 
 <h1>Sokoban Game</h1>
 
