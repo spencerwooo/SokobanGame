@@ -45,7 +45,8 @@ namespace SokobanGame
       { "up", 0x10 },
       { "down", 0x11 },
       { "left", 0x12 },
-      { "right", 0x13 }
+      { "right", 0x13 },
+      { "backsie", 0x20 }
     };
 
     // Map elements
@@ -234,6 +235,7 @@ namespace SokobanGame
       }
 
       // Render statistics
+      // emmmm... See documentation for more
       currentSteps = gameResult & 0xffff;
       currentHealth = (gameResult & 0xff0000) >> 16;
       currentStatus = gameResult >> 24;
@@ -291,7 +293,9 @@ namespace SokobanGame
 
     private void GoBackOneStep(object sender, RoutedEventArgs e)
     {
-      int result = control(mapString, 0x20);
+      int result = control(mapString, directions["backsie"]);
+
+      // emmmm... See documentation for more
       currentSteps = result & 0xffff;
       currentHealth = (result & 0xff0000) >> 16;
       currentStatus = result >> 24;
