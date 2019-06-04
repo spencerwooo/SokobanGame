@@ -17,11 +17,20 @@ namespace SokobanGame
   /// </summary>
   public partial class GameMain : Page
   {
+    // Enable dark mode
+    private bool darkModeEnabled = false;
+
     // Game main attributes
     private int gameLevel;
     private int currentHealth;
     private int currentSteps;
     private int currentStatus;
+
+    // Next level with key stroke combination "BIT"
+    private int eggStatus;
+
+    // Current game result 0 - Win; 1 - Ongoing
+    private int gameResult;
 
     // Count down storyboard
     private Storyboard countdownStoryboard = new Storyboard();
@@ -70,12 +79,15 @@ namespace SokobanGame
     public static extern int control(StringBuilder a, int b);
 
     // Start game!
-    public GameMain(int gameLevel)
+    public GameMain(int gameLevel, bool darkModeEnabled)
     {
       InitializeComponent();
 
       // Get data from LevelSelect
       this.gameLevel = gameLevel;
+      this.darkModeEnabled = darkModeEnabled;
+      this.eggStatus = 0;
+      this.gameResult = 1;
 
       // Change player as levels get harder
       int player = gameLevel % 3 + 1;
@@ -127,7 +139,7 @@ namespace SokobanGame
 
     private void CountdownTimerCompleted(object sender, EventArgs e)
     {
-      NavigationService.Navigate(new GameScore(gameLevel, 0));
+      NavigationService.Navigate(new GameScore(gameLevel, 0, darkModeEnabled));
     }
 
     private void GoBack(object sender, RoutedEventArgs e)
@@ -136,7 +148,7 @@ namespace SokobanGame
         MessageBoxButton.YesNo, MessageBoxImage.Question);
       if (result == MessageBoxResult.Yes)
       {
-        NavigationService.Navigate(new LevelSelect(gameLevel));
+        NavigationService.Navigate(new LevelSelect(gameLevel, darkModeEnabled));
         // NavigationService.GoBack();
       }
       else
@@ -167,6 +179,31 @@ namespace SokobanGame
       control(mapString, levelParams[gameLevel]);
       string mapMatrix = mapString.ToString();
       // Console.WriteLine(mapMatrix);
+      int visibleX = 0, visibleY = 0;
+      if (darkModeEnabled)
+      {
+        for (int i = 0; i < 7; i++)
+        {
+          for (int j = 0; j < 9; j++)
+          {
+            char elementName = mapMatrix[i * 9 + j];
+            if (elementName == 'P')
+            {
+              for (int px = i - 1; px <= i + 1; px++)
+              {
+                for (int py = j - 1; py <= j + 1; py++)
+                {
+                  var visibleCell = (Image)FindName("Map" + px.ToString() + py.ToString());
+                  double distanse = System.Math.Pow(px - i, 2) + System.Math.Pow(py - j, 2);
+                  visibleCell.Opacity = 0.5 * (2 - System.Math.Sqrt(distanse));
+                }
+              }
+              visibleX = i;
+              visibleY = j;
+            }
+          }
+        }
+      }
 
       // Render map elements
       for (int i = 0; i < 7; i++)
@@ -177,6 +214,14 @@ namespace SokobanGame
           char elementName = mapMatrix[i * 9 + j];
           Image mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
           mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+
+          if (darkModeEnabled)
+          {
+            if ((i < visibleX - 1 || i > visibleX + 1 || j < visibleY - 1 || j > visibleY + 1) && darkModeEnabled)
+            {
+              mapCell.Opacity = 0;
+            }
+          }
 
           if (elementName == 'T' || elementName == 'F')
           {
@@ -216,21 +261,58 @@ namespace SokobanGame
         return;
       }
 
-      int gameResult = 0;
-
       switch (e.Key)
       {
         case Key.Up:
+          eggStatus = 0;
           gameResult = control(mapString, directions["up"]);
           break;
         case Key.Down:
+          eggStatus = 0;
           gameResult = control(mapString, directions["down"]);
           break;
         case Key.Left:
+          eggStatus = 0;
           gameResult = control(mapString, directions["left"]);
           break;
         case Key.Right:
+          eggStatus = 0;
           gameResult = control(mapString, directions["right"]);
+          break;
+        case Key.W:
+          eggStatus = 0;
+          gameResult = control(mapString, directions["up"]);
+          break;
+        case Key.S:
+          eggStatus = 0;
+          gameResult = control(mapString, directions["down"]);
+          break;
+        case Key.A:
+          eggStatus = 0;
+          gameResult = control(mapString, directions["left"]);
+          break;
+        case Key.D:
+          eggStatus = 0;
+          gameResult = control(mapString, directions["right"]);
+          break;
+        case Key.B:
+          eggStatus = 1;
+          break;
+        case Key.I:
+          if(eggStatus == 1)
+          {
+            eggStatus = 2;
+          }
+          break;
+        case Key.T:
+          if (eggStatus == 2)
+          {
+            eggStatus = 0;
+            gameResult = 0;
+          }
+          break;
+        default:
+          eggStatus = 0;
           break;
       }
 
@@ -248,7 +330,7 @@ namespace SokobanGame
         Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
         Properties.Settings.Default.Save();
 
-        NavigationService.Navigate(new GameScore(gameLevel, 1));
+        NavigationService.Navigate(new GameScore(gameLevel, 1, darkModeEnabled));
       }
       else if (currentStatus == 2)
       {
@@ -262,6 +344,32 @@ namespace SokobanGame
       {
         string mapMatrix = mapString.ToString();
         Console.WriteLine(mapMatrix);
+        int visibleX = 0, visibleY = 0;
+        if (darkModeEnabled)
+        {
+          for (int i = 0; i < 7; i++)
+          {
+            for (int j = 0; j < 9; j++)
+            {
+              char elementName = mapMatrix[i * 9 + j];
+              if (elementName == 'P')
+              {
+                for (int px = i - 1; px <= i + 1; px++)
+                {
+                  for (int py = j - 1; py <= j + 1; py++)
+                  {
+                    var visibleCell = (Image)FindName("Map" + px.ToString() + py.ToString());
+                    double distanse = System.Math.Pow(px - i, 2) + System.Math.Pow(py - j, 2);
+                    visibleCell.Opacity = 0.5 * (2 - System.Math.Sqrt(distanse));
+                  }
+                }
+                visibleX = i;
+                visibleY = j;
+              }
+            }
+          }
+        }
+
         // Render map elements
         for (int i = 0; i < 7; i++)
         {
@@ -269,8 +377,13 @@ namespace SokobanGame
           {
             // Map element at Row i Col j is Map[i * 9 + j]
             char elementName = mapMatrix[i * 9 + j];
+
             var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
             mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+            if ((i < visibleX - 1 || i > visibleX + 1 || j < visibleY - 1 || j > visibleY + 1) && darkModeEnabled)
+            {
+              mapCell.Opacity = 0;
+            }
 
             if (elementName == 'F')
             {
@@ -317,6 +430,32 @@ namespace SokobanGame
         Console.WriteLine(mapMatrix);
 
         // Render map elements
+        int visibleX = 0, visibleY = 0;
+        if (darkModeEnabled)
+        {
+          for (int i = 0; i < 7; i++)
+          {
+            for (int j = 0; j < 9; j++)
+            {
+              char elementName = mapMatrix[i * 9 + j];
+              if (elementName == 'P')
+              {
+                for (int px = i - 1; px <= i + 1; px++)
+                {
+                  for (int py = j - 1; py <= j + 1; py++)
+                  {
+                    var visibleCell = (Image)FindName("Map" + px.ToString() + py.ToString());
+                    double distanse = System.Math.Pow(px - i, 2) + System.Math.Pow(py - j, 2);
+                    visibleCell.Opacity = 0.5 * (2 - System.Math.Sqrt(distanse));
+                  }
+                }
+                visibleX = i;
+                visibleY = j;
+              }
+            }
+          }
+        }
+
         for (int i = 0; i < 7; i++)
         {
           for (int j = 0; j < 9; j++)
@@ -325,6 +464,10 @@ namespace SokobanGame
             char elementName = mapMatrix[i * 9 + j];
             var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
             mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+            if ((i < visibleX - 1 || i > visibleX + 1 || j < visibleY - 1 || j > visibleY + 1) && darkModeEnabled)
+            {
+              mapCell.Opacity = 0;
+            }
 
             if (elementName == 'F')
             {
@@ -348,7 +491,7 @@ namespace SokobanGame
         MessageBoxButton.YesNo, MessageBoxImage.Question);
       if (result == MessageBoxResult.Yes)
       {
-        NavigationService.Navigate(new GameMain(gameLevel));
+        NavigationService.Navigate(new GameMain(gameLevel, darkModeEnabled));
       }
       else
       {

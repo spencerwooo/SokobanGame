@@ -12,6 +12,7 @@ namespace SokobanGame
   /// </summary>
   public partial class WelcomePage : Page
   {
+    private bool darkModeEnabled = false;
 
     public WelcomePage()
     {
@@ -24,7 +25,7 @@ namespace SokobanGame
     private void StartGame(object sender, RoutedEventArgs e)
     {
       // Go on to level select.
-      NavigationService.Navigate(new LevelSelect(1));
+      NavigationService.Navigate(new LevelSelect(1, darkModeEnabled));
     }
 
     private void jumpAnimation(Image target, double newY, double duration)
@@ -47,5 +48,16 @@ namespace SokobanGame
       translateTransform.BeginAnimation(TranslateTransform.YProperty, animate);
     }
 
+    private void EnableDarkMode(object sender, RoutedEventArgs e)
+    {
+      WelcomePageBackground.Background = new SolidColorBrush(Color.FromRgb(40, 40, 40));
+      this.darkModeEnabled = true;
+    }
+
+    private void DisableDarkMode(object sender, RoutedEventArgs e)
+    {
+      WelcomePageBackground.Background = new SolidColorBrush(Color.FromRgb(61, 52, 51));
+      this.darkModeEnabled = false;
+    }
   }
 }

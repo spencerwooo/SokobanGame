@@ -15,13 +15,15 @@ namespace SokobanGame
   {
     private int level;
     private int result;
+    private bool darkModeEnabled;
 
-    public GameScore(int level, int result)
+    public GameScore(int level, int result, bool darkModeEnabled)
     {
       InitializeComponent();
 
       this.level = level;
       this.result = result;
+      this.darkModeEnabled = darkModeEnabled;
 
       if (result == 1)
       {
@@ -73,7 +75,7 @@ namespace SokobanGame
         nextLevel = level;
       }
 
-      NavigationService.Navigate(new GameMain(nextLevel));
+      NavigationService.Navigate(new GameMain(nextLevel, darkModeEnabled));
     }
   }
 }
