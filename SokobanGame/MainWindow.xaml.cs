@@ -19,7 +19,7 @@ namespace SokobanGame
       InitializeComponent();
 
       // Go to welcome page
-      _NavigationFrame.Navigate(new WelcomePage());
+      _NavigationFrame.Navigate(new WelcomePage(false));
 
       // Start playing background music
       string lobbyMusicPath = "Resources/music/LobbyMusic.mp3";

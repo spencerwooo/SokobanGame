@@ -25,6 +25,11 @@ namespace SokobanGame
       this.result = result;
       this.darkModeEnabled = darkModeEnabled;
 
+      if (darkModeEnabled)
+      {
+        BackgroundGrid.Background = new SolidColorBrush(Color.FromRgb(37, 37, 38));
+      }
+
       if (result == 1)
       {
         if (level == 11)

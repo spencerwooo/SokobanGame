@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
@@ -21,6 +22,11 @@ namespace SokobanGame
 
       this.currentLevel = currentLevel;
       this.darkModeEnabled = darkModeEnabled;
+
+      if (darkModeEnabled)
+      {
+        BackgroundGrid.Background = new SolidColorBrush(Color.FromRgb(37, 37, 38));
+      }
 
       string imagePath = imagePathBuilder(currentLevel);
       LevelPreviewImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
@@ -46,7 +52,8 @@ namespace SokobanGame
 
     private void BackHome(object sender, RoutedEventArgs e)
     {
-      NavigationService.Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
+      NavigationService.Navigate(new WelcomePage(darkModeEnabled));
+      // NavigationService.Navigate(new Uri("WelcomePage.xaml", UriKind.Relative));
       // NavigationService.GoBack();
     }
 

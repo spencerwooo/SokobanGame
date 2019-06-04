@@ -7,27 +7,88 @@
       mc:Ignorable="d" 
       d:DesignHeight="530" d:DesignWidth="900"
       Title="WelcomePage">
+  <Page.Resources>
+    <Style x:Key="FocusVisual">
+      <Setter Property="Control.Template">
+        <Setter.Value>
+          <ControlTemplate>
+            <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+    <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+    <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+    <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+    <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+    <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+    <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+    <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+    <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+      <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+      <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+      <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+      <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Padding" Value="1"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type ToggleButton}">
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+              <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="Button.IsDefaulted" Value="true">
+                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+              </Trigger>
+              <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                <Setter Property="OpacityMask" TargetName="border" Value="#CC000000"/>
+              </Trigger>
+              <Trigger Property="IsPressed" Value="true">
+                <Setter Property="BorderBrush" TargetName="border" Value="{x:Null}"/>
+                <Setter Property="OpacityMask" TargetName="border" Value="#CC000000"/>
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+  </Page.Resources>
 
-    <Grid x:Name="WelcomePageBackground" Background="#FF3D3433" Margin="0">
-        <Image HorizontalAlignment="Center" Height="100" Margin="0,80,0,0" VerticalAlignment="Top" Width="550" 
-               Source="/SokobanGame;component/Resources/title.png" Stretch="Fill"/>
-        <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center" Width="23" Height="23" Margin="742,387,135,119.6" 
-                      Background="#FFEEA634" BorderBrush="{x:Null}" Checked="EnableDarkMode" Unchecked="DisableDarkMode"/>
-        <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,374,0,0" 
+  <Grid x:Name="WelcomePageBackground" Background="#FF2D2D2D" Margin="0">
+    <Image HorizontalAlignment="Center" Height="120" Margin="0,80,0,0" VerticalAlignment="Top" Width="550" 
+               Source="/SokobanGame;component/Resources/home.png" Stretch="Uniform"/>
+    <ToggleButton x:Name="ModeToggleBtn" HorizontalAlignment="Center" VerticalAlignment="Center" Width="23" Height="23" Margin="731,389,146,118" BorderBrush="{x:Null}" Checked="EnableDarkMode" Unchecked="DisableDarkMode" 
+                  Style="{DynamicResource ToggleButtonStyle}">
+      <ToggleButton.Background>
+        <ImageBrush ImageSource="/SokobanGame;component/Resources/lightmode.png"/>
+      </ToggleButton.Background>
+    </ToggleButton>
+    <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Center" Margin="0,374,0,0" 
                 VerticalAlignment="Top" Width="165" FontFamily="Peepo" FontSize="16" Click="StartGame" 
                 BorderBrush="{x:Null}" Foreground="White" Height="51">
-            <Button.Background>
-                <ImageBrush ImageSource="/SokobanGame;component/Resources/startButton.png"/>
-            </Button.Background>
-        </Button>
-        <Image x:Name="PlayerIcon1" HorizontalAlignment="Left" Height="42" Margin="70,0,0,45" VerticalAlignment="Bottom" Width="31" 
+      <Button.Background>
+        <ImageBrush ImageSource="Resources/play.png"/>
+      </Button.Background>
+    </Button>
+    <Image x:Name="PlayerIcon1" HorizontalAlignment="Left" Height="42" Margin="70,0,0,45" VerticalAlignment="Bottom" Width="31" 
                Source="/SokobanGame;component/Resources/player/player1.png" Stretch="Fill"/>
-        <Image x:Name="PlayerIcon2" HorizontalAlignment="Left" Height="42" Margin="140,0,0,45" VerticalAlignment="Bottom" Width="31" 
+    <Image x:Name="PlayerIcon2" HorizontalAlignment="Left" Height="42" Margin="140,0,0,45" VerticalAlignment="Bottom" Width="31" 
                Source="/SokobanGame;component/Resources/player/player2.png" Stretch="Fill"/>
-        <Image x:Name="PlayerIcon3" HorizontalAlignment="Left" Height="42" Margin="210,0,0,45" VerticalAlignment="Bottom" Width="31" 
+    <Image x:Name="PlayerIcon3" HorizontalAlignment="Left" Height="42" Margin="210,0,0,45" VerticalAlignment="Bottom" Width="31" 
                Source="/SokobanGame;component/Resources/player/player3.png" Stretch="Fill"/>
-        <Label Content="©2019 Team Offline Flower" HorizontalAlignment="Right" Margin="0,0,40,30" VerticalAlignment="Bottom" 
+    <Label Content="©2019 Team Offline Flower" HorizontalAlignment="Right" Margin="0,0,40,30" VerticalAlignment="Bottom" 
                Foreground="White" FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="14"/>
-        <Label Content="Dark Mode" HorizontalAlignment="Left" Margin="783,383,0,0" VerticalAlignment="Top" FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" Foreground="White" FontSize="14"/>
-    </Grid>
+    <Label x:Name="ModeLabel" Content="NORMAL MODE" HorizontalAlignment="Left" Margin="762,385,0,0" VerticalAlignment="Top" FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" Foreground="White" FontSize="14"/>
+  </Grid>
 </Page>

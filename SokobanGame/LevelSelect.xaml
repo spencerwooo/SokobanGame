@@ -10,7 +10,7 @@
       d:DesignHeight="530" d:DesignWidth="900"
       Title="LevelSelect">
 
-    <Grid Background="#FF3D3433">
+    <Grid x:Name="BackgroundGrid" Background="#FF2D2D2D">
         <Label x:Name="SelectedLevelLabel" Content="SELECTED LEVEL #1" HorizontalContentAlignment="Center" 
                HorizontalAlignment="Center" Margin="0,14,0,0" 
                VerticalAlignment="Top" Foreground="White" Height="52" Width="250" 
@@ -34,7 +34,7 @@
                 VerticalAlignment="Top" Width="149" FontFamily="Peepo" FontSize="16" Click="PlayLevel" 
                 BorderBrush="{x:Null}" Foreground="White" Height="47">
             <Button.Background>
-                <ImageBrush ImageSource="/SokobanGame;component/Resources/startGameBtn.png"/>
+                <ImageBrush ImageSource="Resources/go.png"/>
             </Button.Background>
         </Button>
         <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,20,0,0" 
@@ -56,7 +56,7 @@
             VerticalAlignment="Top" Width="75" Height="30" BorderBrush="{x:Null}" Foreground="{x:Null}" 
             Click="ResetGame">
             <Button.Background>
-                <ImageBrush ImageSource="/SokobanGame;component/Resources/reset.png"/>
+                <ImageBrush ImageSource="/SokobanGame;component/Resources/reset.png" Stretch="Uniform"/>
             </Button.Background>
         </Button>
     </Grid>

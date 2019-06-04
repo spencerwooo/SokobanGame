@@ -8,8 +8,8 @@
       d:DesignHeight="530" d:DesignWidth="900"
       Title="GameMain" Loaded="Page_Loaded" Unloaded="Page_Unloaded" KeyUp="Window_KeyUp">
 
-    <Grid Background="#FF3D3433">
-        <Grid HorizontalAlignment="Center" Height="370" Margin="0,0,0,0" VerticalAlignment="Center" 
+    <Grid x:Name="BackgroundGrid" Background="#FF2D2D2D">
+        <Grid x:Name="MapBackgroundGrid" HorizontalAlignment="Center" Height="370" Margin="0,0,0,0" VerticalAlignment="Center" 
               Width="500" Background="#FF97B052">
             <Grid x:Name="MainMapGrid" HorizontalAlignment="Center" Height="315" Margin="0,0,0,0" VerticalAlignment="Center" 
               Width="405">

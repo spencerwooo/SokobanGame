@@ -89,6 +89,13 @@ namespace SokobanGame
       this.eggStatus = 0;
       this.gameResult = 1;
 
+      // Render game mode
+      if (darkModeEnabled)
+      {
+        BackgroundGrid.Background = new SolidColorBrush(Color.FromRgb(37, 37, 38));
+        MapBackgroundGrid.Background = new SolidColorBrush(Color.FromRgb(37, 37, 38));
+      }
+
       // Change player as levels get harder
       int player = gameLevel % 3 + 1;
       mapElements['P'] = "/SokobanGame;component/Resources/player/player" + player + "-1.png";
@@ -299,7 +306,7 @@ namespace SokobanGame
           eggStatus = 1;
           break;
         case Key.I:
-          if(eggStatus == 1)
+          if (eggStatus == 1)
           {
             eggStatus = 2;
           }
@@ -359,8 +366,8 @@ namespace SokobanGame
                   for (int py = j - 1; py <= j + 1; py++)
                   {
                     var visibleCell = (Image)FindName("Map" + px.ToString() + py.ToString());
-                    double distanse = System.Math.Pow(px - i, 2) + System.Math.Pow(py - j, 2);
-                    visibleCell.Opacity = 0.5 * (2 - System.Math.Sqrt(distanse));
+                    double distanse = Math.Pow(px - i, 2) + Math.Pow(py - j, 2);
+                    visibleCell.Opacity = 0.5 * (2 - Math.Sqrt(distanse));
                   }
                 }
                 visibleX = i;

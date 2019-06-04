@@ -8,7 +8,7 @@
       d:DesignHeight="530" d:DesignWidth="900"
       Title="GameScore">
 
-    <Grid Background="#FF3D3433">
+    <Grid x:Name="BackgroundGrid" Background="#FF2D2D2D">
         <Image x:Name="AwardImage" HorizontalAlignment="Left" Height="228" Margin="82,0,0,0" VerticalAlignment="Center" Width="200" 
                Source="/SokobanGame;component/Resources/award.png"/>
         <Label x:Name="CaptionText" Content="Congratulations!" HorizontalAlignment="Left" Margin="382,130,0,0" 

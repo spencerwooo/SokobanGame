@@ -164,11 +164,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\startbutton.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\exit.png" />
   </ItemGroup>
   <ItemGroup>
@@ -180,17 +175,11 @@
     <Resource Include="Resources\player\player3.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\title.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\left.png" />
     <Resource Include="Resources\right.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\back.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\startGameBtn.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\stats\health.png" />
@@ -253,6 +242,11 @@
     <Resource Include="Resources\continue.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\play.png" />
+    <Resource Include="Resources\home.png" />
+    <Resource Include="Resources\go.png" />
+    <Resource Include="Resources\darkmode.png" />
+    <Resource Include="Resources\lightmode.png" />
     <Content Include="SokobanASM.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
