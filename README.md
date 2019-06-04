@@ -17,18 +17,21 @@ A Sokoban Game, implemented by WPF. Core logics implemented by x86 assembly at r
 
 ## 界面
 
-|                        Welcome Page                       |                   Level Select (Played)                   |
+|                 Welcome Page (Normal Mode)                |                  Welcome Page (Dark Mode)                 |
 |:---------------------------------------------------------:|:---------------------------------------------------------:|
-| ![](https://i.loli.net/2019/06/02/5cf3d1e92bb7f49218.png) | ![](https://i.loli.net/2019/06/02/5cf3d1e9b854378941.png) |
+| ![](https://i.loli.net/2019/06/04/5cf686c3b0e6066673.png) | ![](https://i.loli.net/2019/06/04/5cf6863a4e5c477783.png) |
 
-|                  Level Select (Unplayed)                  |                         Main Game                         |
+|                     Level Normal Mode                     |                      Level Dark Mode                      |
 |:---------------------------------------------------------:|:---------------------------------------------------------:|
-| ![](https://i.loli.net/2019/06/02/5cf3be08237fc88178.png) | ![](https://i.loli.net/2019/06/02/5cf3be02e0d8666261.png) |
+| ![](https://i.loli.net/2019/06/04/5cf68740cabea28634.png) | ![](https://i.loli.net/2019/06/04/5cf6863a516ce60047.png) |
 
-
-|                       Level Completed                     |                      Level Failed                         |
+|                   Select Level (Played)                   |                  Select Level (Unplayed)                  |
 |:---------------------------------------------------------:|:---------------------------------------------------------:|
-| ![](https://i.loli.net/2019/06/02/5cf3d1e9edc1929006.png) | ![](https://i.loli.net/2019/06/02/5cf3d1eaab0a713963.png) |
+| ![](https://i.loli.net/2019/06/04/5cf6863a4e01f18224.png) | ![](https://i.loli.net/2019/06/04/5cf6881d6385769316.png) |
+
+|                      Level Completed                      |                        Level Failed                       |
+|:---------------------------------------------------------:|:---------------------------------------------------------:|
+| ![](https://i.loli.net/2019/06/04/5cf68639dcc7e93014.png) | ![](https://i.loli.net/2019/06/04/5cf687749d0f628419.png) |
 
 ## 编译与运行
 
