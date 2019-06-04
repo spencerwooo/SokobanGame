@@ -26,6 +26,12 @@ namespace SokobanGame
     private int currentSteps;
     private int currentStatus;
 
+    // Next level with key stroke combination "BIT"
+    private int eggStatus;
+
+    // Current game result 0 - Win; 1 - Ongoing
+    private int gameResult;
+
     // Count down storyboard
     private Storyboard countdownStoryboard = new Storyboard();
     private StringAnimationUsingKeyFrames countDownAnimation = new StringAnimationUsingKeyFrames();
@@ -80,6 +86,8 @@ namespace SokobanGame
       // Get data from LevelSelect
       this.gameLevel = gameLevel;
       this.darkModeEnabled = darkModeEnabled;
+      this.eggStatus = 0;
+      this.gameResult = 1;
 
       // Change player as levels get harder
       int player = gameLevel % 3 + 1;
@@ -213,7 +221,6 @@ namespace SokobanGame
             {
               mapCell.Opacity = 0;
             }
-
           }
 
           if (elementName == 'T' || elementName == 'F')
@@ -254,36 +261,58 @@ namespace SokobanGame
         return;
       }
 
-      int gameResult = 1;
-
       switch (e.Key)
       {
         case Key.Up:
+          eggStatus = 0;
           gameResult = control(mapString, directions["up"]);
           break;
         case Key.Down:
+          eggStatus = 0;
           gameResult = control(mapString, directions["down"]);
           break;
         case Key.Left:
+          eggStatus = 0;
           gameResult = control(mapString, directions["left"]);
           break;
         case Key.Right:
+          eggStatus = 0;
           gameResult = control(mapString, directions["right"]);
           break;
         case Key.W:
+          eggStatus = 0;
           gameResult = control(mapString, directions["up"]);
           break;
         case Key.S:
+          eggStatus = 0;
           gameResult = control(mapString, directions["down"]);
           break;
         case Key.A:
+          eggStatus = 0;
           gameResult = control(mapString, directions["left"]);
           break;
         case Key.D:
+          eggStatus = 0;
           gameResult = control(mapString, directions["right"]);
           break;
+        case Key.B:
+          eggStatus = 1;
+          break;
+        case Key.I:
+          if(eggStatus == 1)
+          {
+            eggStatus = 2;
+          }
+          break;
+        case Key.T:
+          if (eggStatus == 2)
+          {
+            eggStatus = 0;
+            gameResult = 0;
+          }
+          break;
         default:
-          gameResult = 1 << 24;
+          eggStatus = 0;
           break;
       }
 
