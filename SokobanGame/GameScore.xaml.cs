@@ -43,10 +43,10 @@ namespace SokobanGame
 
         Uri buttonBrushBg = new Uri("/SokobanGame;component/Resources/restart.png", UriKind.Relative);
         StreamResourceInfo streamInfo = Application.GetResourceStream(buttonBrushBg);
-        BitmapFrame temp = BitmapFrame.Create(streamInfo.Stream);
+        BitmapFrame bitmapFrame = BitmapFrame.Create(streamInfo.Stream);
         ImageBrush brush = new ImageBrush
         {
-          ImageSource = temp
+          ImageSource = bitmapFrame
         };
         ContinueButton.Background = brush;
       }
