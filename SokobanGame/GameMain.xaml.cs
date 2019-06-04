@@ -270,6 +270,21 @@ namespace SokobanGame
         case Key.Right:
           gameResult = control(mapString, directions["right"]);
           break;
+        case Key.W:
+          gameResult = control(mapString, directions["up"]);
+          break;
+        case Key.S:
+          gameResult = control(mapString, directions["down"]);
+          break;
+        case Key.A:
+          gameResult = control(mapString, directions["left"]);
+          break;
+        case Key.D:
+          gameResult = control(mapString, directions["right"]);
+          break;
+        default:
+          gameResult = 1 << 24;
+          break;
       }
 
       // Render statistics
