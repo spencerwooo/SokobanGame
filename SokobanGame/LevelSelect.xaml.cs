@@ -13,12 +13,14 @@ namespace SokobanGame
   {
     private int currentLevel = 1;
     private int totalLevels = 11;
+    private bool darkModeEnabled = false;
 
-    public LevelSelect(int currentLevel)
+    public LevelSelect(int currentLevel, bool darkModeEnabled)
     {
       InitializeComponent();
 
       this.currentLevel = currentLevel;
+      this.darkModeEnabled = darkModeEnabled;
 
       string imagePath = imagePathBuilder(currentLevel);
       LevelPreviewImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
@@ -33,7 +35,7 @@ namespace SokobanGame
       string levelSucceeded = Properties.Settings.Default.LevelSucceeded[currentLevel - 1];
       if (levelSucceeded == "true")
       {
-        NavigationService.Navigate(new GameMain(currentLevel));
+        NavigationService.Navigate(new GameMain(currentLevel, darkModeEnabled));
       }
       else
       {

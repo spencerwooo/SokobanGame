@@ -1,14 +1,19 @@
-# 🎮 Sokoban Game
+<div align="center">
+  
+<img src="https://i.loli.net/2019/06/03/5cf518fcd23cb88530.png" alt="icon" width="60" />
+
+<h1>Sokoban Game</h1>
+
 
 ![](https://flat.badgen.net/badge/汇编语言/课程设计/yellow)
 ![](https://flat.badgen.net/badge/platform/Windows/blue?icon=windows)
 ![](https://flat.badgen.net/badge/license/MIT/red)
 
-> A Sokoban Game, implemented by WPF. Core logics implemented by x86 assembly. 
-> 
-> 俗称，推箱子。
+</div>
 
-Sokoban core assembly repo at: [felinae98/SokobanASM](https://github.com/felinae98/SokobanASM).
+A Sokoban Game, implemented by WPF. Core logics implemented by x86 assembly at repo: [felinae98/SokobanASM](https://github.com/felinae98/SokobanASM).
+
+> 俗称，推箱子。
 
 ## 界面
 
