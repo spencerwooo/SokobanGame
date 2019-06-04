@@ -171,7 +171,7 @@ namespace SokobanGame
       control(mapString, levelParams[gameLevel]);
       string mapMatrix = mapString.ToString();
       // Console.WriteLine(mapMatrix);
-      int visible_x = 0, visible_y = 0;
+      int visibleX = 0, visibleY = 0;
       if (darkModeEnabled)
       {
         for (int i = 0; i < 7; i++)
@@ -190,8 +190,8 @@ namespace SokobanGame
                   visibleCell.Opacity = 0.5 * (2 - System.Math.Sqrt(distanse));
                 }
               }
-              visible_x = i;
-              visible_y = j;
+              visibleX = i;
+              visibleY = j;
             }
           }
         }
@@ -207,14 +207,13 @@ namespace SokobanGame
           Image mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
           mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
 
-
           if (darkModeEnabled)
           {
-            mapCell.Opacity = 0;
-            if (i >= visible_x - 1 && i <= visible_x + 1 && j >= visible_y - 1 && j <= visible_y + 1)
+            if ((i < visibleX - 1 || i > visibleX + 1 || j < visibleY - 1 || j > visibleY + 1) && darkModeEnabled)
             {
-              mapCell.Opacity = 1;
+              mapCell.Opacity = 0;
             }
+
           }
 
           if (elementName == 'T' || elementName == 'F')
@@ -387,6 +386,32 @@ namespace SokobanGame
         Console.WriteLine(mapMatrix);
 
         // Render map elements
+        int visibleX = 0, visibleY = 0;
+        if (darkModeEnabled)
+        {
+          for (int i = 0; i < 7; i++)
+          {
+            for (int j = 0; j < 9; j++)
+            {
+              char elementName = mapMatrix[i * 9 + j];
+              if (elementName == 'P')
+              {
+                for (int px = i - 1; px <= i + 1; px++)
+                {
+                  for (int py = j - 1; py <= j + 1; py++)
+                  {
+                    var visibleCell = (Image)FindName("Map" + px.ToString() + py.ToString());
+                    double distanse = System.Math.Pow(px - i, 2) + System.Math.Pow(py - j, 2);
+                    visibleCell.Opacity = 0.5 * (2 - System.Math.Sqrt(distanse));
+                  }
+                }
+                visibleX = i;
+                visibleY = j;
+              }
+            }
+          }
+        }
+
         for (int i = 0; i < 7; i++)
         {
           for (int j = 0; j < 9; j++)
@@ -395,6 +420,10 @@ namespace SokobanGame
             char elementName = mapMatrix[i * 9 + j];
             var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
             mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+            if ((i < visibleX - 1 || i > visibleX + 1 || j < visibleY - 1 || j > visibleY + 1) && darkModeEnabled)
+            {
+              mapCell.Opacity = 0;
+            }
 
             if (elementName == 'F')
             {
