@@ -125,6 +125,8 @@ namespace SokobanGame
           Properties.Settings.Default.LevelSucceeded[i] = "false";
         }
         Properties.Settings.Default.LevelSucceeded[0] = "true";
+
+        Properties.Settings.Default.GodModeEnabled = false;
         Properties.Settings.Default.Save();
       }
       else

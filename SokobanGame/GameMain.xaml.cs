@@ -20,11 +20,17 @@ namespace SokobanGame
     // Enable dark mode
     private bool darkModeEnabled = false;
 
+    // Enable auto mode, triggered by level #1 egg
+    private bool godModeEnabled = false;
+
     // Game main attributes
     private int gameLevel;
     private int currentHealth;
     private int currentSteps;
     private int currentStatus;
+
+    // God mode
+    private int godModeSteps;
 
     // Next level with key stroke combination "BIT"
     private int eggStatus;
@@ -68,32 +74,54 @@ namespace SokobanGame
       { 'F', "/SokobanGame;component/Resources/map/box.png" },
       { 'W', "/SokobanGame;component/Resources/map/wall.png" },
       { 'G', "/SokobanGame;component/Resources/map/grass.png" },
-      { 'E', "" }
+      { 'E', "" },
+      { 'V',  "/SokobanGame;component/Resources/map/brokenwall.png"},
+      { 'R',  "/SokobanGame;component/Resources/player/player1-1.png"},
+      { 'A', "/SokobanGame;component/Resources/map/egg.png"}
     };
 
     // Heart stickers dictionary
     private Dictionary<string, Image> heartImageDict = new Dictionary<string, Image> { };
 
+    // God mode steps
+    private Dictionary<int, int> autosteps = new Dictionary<int, int>
+    {
+      { 1, 4 }, { 2, 3 }, { 3, 12 },
+      { 4, 16 }, { 5, 35 }, { 6, 29 },
+      { 7, 53 }, { 8, 57 }, { 9, 34 },
+      { 10, 45 }, { 11, 50 }
+    };
+
     // Game core logics, in Assembly
     [DllImport("SokobanASM.dll")]
     public static extern int control(StringBuilder a, int b);
+
+    [DllImport("SokobanASM.dll")]
+    public static extern int auto(StringBuilder a, int b, int c);
 
     // Start game!
     public GameMain(int gameLevel, bool darkModeEnabled)
     {
       InitializeComponent();
 
+      godModeEnabled = Properties.Settings.Default.GodModeEnabled;
+
       // Get data from LevelSelect
       this.gameLevel = gameLevel;
       this.darkModeEnabled = darkModeEnabled;
-      this.eggStatus = 0;
-      this.gameResult = 1;
+      this.godModeSteps = 0;
+      eggStatus = 0;
 
       // Render game mode
       if (darkModeEnabled)
       {
         BackgroundGrid.Background = new SolidColorBrush(Color.FromRgb(37, 37, 38));
         MapBackgroundGrid.Background = new SolidColorBrush(Color.FromRgb(37, 37, 38));
+      }
+
+      if (godModeEnabled)
+      {
+        GodModeBtn.Visibility = Visibility.Visible;
       }
 
       // Change player as levels get harder
@@ -183,7 +211,7 @@ namespace SokobanGame
     private void renderMap()
     {
       // Get map from control
-      control(mapString, levelParams[gameLevel]);
+      gameResult = control(mapString, levelParams[gameLevel]);
       string mapMatrix = mapString.ToString();
       // Console.WriteLine(mapMatrix);
       int visibleX = 0, visibleY = 0;
@@ -243,7 +271,10 @@ namespace SokobanGame
             translateTransform.Y = -20;
             heartyImage.RenderTransform = translateTransform;
 
-            heartImageDict.Add(i.ToString() + j.ToString(), heartyImage);
+            if (!heartImageDict.ContainsKey(i.ToString() + j.ToString()))
+            {
+              heartImageDict.Add(i.ToString() + j.ToString(), heartyImage);
+            }
 
             MainMapGrid.Children.Add(heartyImage);
             Grid.SetRow(heartyImage, i);
@@ -392,6 +423,13 @@ namespace SokobanGame
               mapCell.Opacity = 0;
             }
 
+            if (elementName == 'R')
+            {
+              MessageBox.Show("恭喜，来自开发者的祝福");
+              Properties.Settings.Default.GodModeEnabled = true;
+              GodModeBtn.Visibility = Visibility.Visible;
+            }
+
             if (elementName == 'F')
             {
               heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Visible;
@@ -492,6 +530,117 @@ namespace SokobanGame
       }
     }
 
+    private void AutoMove()
+    {
+      if (godModeSteps == 0)
+      {
+        renderMap();
+        godModeSteps++;
+        AutoMove();
+      }
+      else if (godModeSteps <= autosteps[gameLevel])
+      {
+        Storyboard sb = new Storyboard();
+        DoubleAnimation animation = new DoubleAnimation();
+
+        animation.Duration = TimeSpan.FromMilliseconds(300);
+        Storyboard.SetTarget(animation, MainMapGrid);
+        Storyboard.SetTargetProperty(animation, new PropertyPath("Width"));
+
+        sb.Children.Add(animation);
+        sb.Completed += OneStep;
+        sb.Begin();
+      }
+    }
+
+    private void OneStep(object sender, EventArgs e)
+    {
+      gameResult = auto(mapString, levelParams[gameLevel], godModeSteps - 1);
+      godModeSteps++;
+
+      // Render statistics
+      currentSteps = gameResult & 0xffff;
+      currentHealth = (gameResult & 0xff0000) >> 16;
+      currentStatus = gameResult >> 24;
+
+      MovesLabel.Content = "STEPS: " + currentSteps.ToString();
+      HealthLabel.Content = "HEALTH: " + currentHealth.ToString();
+
+      if (currentStatus == 0)
+      {
+        Properties.Settings.Default.LevelSucceeded[gameLevel - 1] = "true";
+        Properties.Settings.Default.Save();
+
+        NavigationService.Navigate(new GameScore(gameLevel, 1, darkModeEnabled));
+      }
+      else
+      {
+        string mapMatrix = mapString.ToString();
+
+        // Render dark mode
+        int visibleX = 0, visibleY = 0;
+        if (darkModeEnabled)
+        {
+          for (int i = 0; i < 7; i++)
+          {
+            for (int j = 0; j < 9; j++)
+            {
+              char elementName = mapMatrix[i * 9 + j];
+              if (elementName == 'P')
+              {
+                for (int px = i - 1; px <= i + 1; px++)
+                {
+                  for (int py = j - 1; py <= j + 1; py++)
+                  {
+                    var visibleCell = (Image)FindName("Map" + px.ToString() + py.ToString());
+
+                    // Element opacity decreases with distance
+                    double distanse = Math.Pow(px - i, 2) + Math.Pow(py - j, 2);
+                    visibleCell.Opacity = 0.5 * (2 - Math.Sqrt(distanse));
+                  }
+                }
+                visibleX = i;
+                visibleY = j;
+              }
+            }
+          }
+        }
+
+        // Render map elements
+        for (int i = 0; i < 7; i++)
+        {
+          for (int j = 0; j < 9; j++)
+          {
+            // Map element at Row i Col j is Map[i * 9 + j]
+            char elementName = mapMatrix[i * 9 + j];
+
+            var mapCell = (Image)FindName("Map" + i.ToString() + j.ToString());
+            mapCell.Source = new BitmapImage(new Uri(mapElements[elementName], UriKind.Relative));
+
+            // Render dark mode invisible map elements
+            if ((i < visibleX - 1 || i > visibleX + 1 || j < visibleY - 1 || j > visibleY + 1) && darkModeEnabled)
+            {
+              mapCell.Opacity = 0;
+            }
+
+            // Render heart images on top of box
+            if (elementName == 'F')
+            {
+              heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Visible;
+            }
+            else
+            {
+              if (heartImageDict.ContainsKey(i.ToString() + j.ToString()))
+              {
+                heartImageDict[i.ToString() + j.ToString()].Visibility = Visibility.Hidden;
+              }
+            }
+          }
+        }
+      }
+      AutoMove();
+    }
+
     private void RestartGame(object sender, RoutedEventArgs e)
     {
       var result = MessageBox.Show("Are you sure to restart level?", "Restart level",
@@ -499,6 +648,20 @@ namespace SokobanGame
       if (result == MessageBoxResult.Yes)
       {
         NavigationService.Navigate(new GameMain(gameLevel, darkModeEnabled));
+      }
+      else
+      {
+        // Do nothing.
+      }
+    }
+
+    private void GodModeStart(object sender, RoutedEventArgs e)
+    {
+      var result = MessageBox.Show("Enable God Mode?", "God Mode",
+        MessageBoxButton.YesNo, MessageBoxImage.Question);
+      if (result == MessageBoxResult.Yes)
+      {
+        AutoMove();
       }
       else
       {
