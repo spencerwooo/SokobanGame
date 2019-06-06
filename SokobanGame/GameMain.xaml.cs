@@ -31,6 +31,7 @@ namespace SokobanGame
 
     // God mode
     private int godModeSteps;
+    private int godModeStatus;
 
     // Next level with key stroke combination "BIT"
     private int eggStatus;
@@ -109,8 +110,9 @@ namespace SokobanGame
       // Get data from LevelSelect
       this.gameLevel = gameLevel;
       this.darkModeEnabled = darkModeEnabled;
-      this.godModeSteps = 0;
+      godModeSteps = 0;
       eggStatus = 0;
+      godModeStatus = 0;
 
       // Render game mode
       if (darkModeEnabled)
@@ -123,6 +125,10 @@ namespace SokobanGame
       {
         GodModeBtn.Visibility = Visibility.Visible;
       }
+
+      GoBackBtn.IsEnabled = true;
+      RestartBtn.IsEnabled = true;
+      BackOneBtn.IsEnabled = true;
 
       // Change player as levels get harder
       int player = gameLevel % 3 + 1;
@@ -222,7 +228,7 @@ namespace SokobanGame
           for (int j = 0; j < 9; j++)
           {
             char elementName = mapMatrix[i * 9 + j];
-            if (elementName == 'P')
+            if (elementName == 'P' || elementName == 'Q' || elementName == 'R')
             {
               for (int px = i - 1; px <= i + 1; px++)
               {
@@ -299,6 +305,10 @@ namespace SokobanGame
         return;
       }
 
+      if (godModeStatus == 1)
+      {
+        return;
+      }
       switch (e.Key)
       {
         case Key.Up:
@@ -390,7 +400,7 @@ namespace SokobanGame
             for (int j = 0; j < 9; j++)
             {
               char elementName = mapMatrix[i * 9 + j];
-              if (elementName == 'P')
+              if (elementName == 'P' || elementName == 'Q' || elementName == 'R')
               {
                 for (int px = i - 1; px <= i + 1; px++)
                 {
@@ -483,7 +493,7 @@ namespace SokobanGame
             for (int j = 0; j < 9; j++)
             {
               char elementName = mapMatrix[i * 9 + j];
-              if (elementName == 'P')
+              if (elementName == 'P' || elementName == 'Q' || elementName == 'R')
               {
                 for (int px = i - 1; px <= i + 1; px++)
                 {
@@ -586,7 +596,7 @@ namespace SokobanGame
             for (int j = 0; j < 9; j++)
             {
               char elementName = mapMatrix[i * 9 + j];
-              if (elementName == 'P')
+              if (elementName == 'P' || elementName == 'Q' || elementName == 'R')
               {
                 for (int px = i - 1; px <= i + 1; px++)
                 {
@@ -661,6 +671,10 @@ namespace SokobanGame
         MessageBoxButton.YesNo, MessageBoxImage.Question);
       if (result == MessageBoxResult.Yes)
       {
+        godModeStatus = 1;
+        GoBackBtn.IsEnabled = false;
+        RestartBtn.IsEnabled = false;
+        BackOneBtn.IsEnabled = false;
         AutoMove();
       }
       else
