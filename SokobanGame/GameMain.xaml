@@ -105,7 +105,7 @@
         <Image x:Name="Map68" Grid.Row="6" Grid.Column="7" Source="/SokobanGame;component/Resources/map/grass.png" Grid.ColumnSpan="3" Margin="44.6,0.4,-0.2,0.2"/>
       </Grid>
     </Grid>
-    <Button Content="Button" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,20,0,0" 
+    <Button x:Name="GoBackBtn" Content="Button" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="20,20,0,0" 
                 VerticalAlignment="Top" Width="40" Height="40" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="GoBack">
       <Button.Background>
         <ImageBrush ImageSource="/SokobanGame;component/Resources/back.png"/>
@@ -136,14 +136,14 @@
                Source="/SokobanGame;component/Resources/stats/moves.png"/>
     <Label x:Name="MovesLabel" Content="Moves" HorizontalAlignment="Left" Margin="80,275,0,0" VerticalAlignment="Top" 
                FontFamily="/SokobanGame;component/Resources/fonts/#Peepo" FontSize="18" Foreground="White" FontWeight="Bold"/>
-    <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Right" Margin="0,452,40,0" 
+    <Button x:Name="BackOneBtn" Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Right" Margin="0,452,40,0" 
             VerticalAlignment="Top" Width="87" Height="35" BorderBrush="{x:Null}" Foreground="{x:Null}" 
             Click="GoBackOneStep">
       <Button.Background>
         <ImageBrush ImageSource="/SokobanGame;component/Resources/goback.png"/>
       </Button.Background>
     </Button>
-    <Button Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="30,452,0,0" 
+    <Button x:Name="RestartBtn" Content="" Style="{StaticResource PixelButton}" HorizontalAlignment="Left" Margin="30,452,0,0" 
             VerticalAlignment="Top" Width="88" Height="35" BorderBrush="{x:Null}" Foreground="{x:Null}" 
             Click="RestartGame">
       <Button.Background>
